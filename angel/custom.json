@@ -1,7 +1,0 @@
-{
-    "voice": "en-US-JennyNeural",
-    "image": "https://humians-demos.vercel.app/angel/angel.png",
-    "video": "angel.mp4",
-    "humain": "did:meira5",
-    "recognition_lang": "en-US"
-}
