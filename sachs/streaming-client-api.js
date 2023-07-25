@@ -49,7 +49,7 @@ const say = async (input = 'Heavy Metal') => {
       body: JSON.stringify({
         text: input,
         idle_url: idleUrl,
-        voice_name: CUSTOM.voice_name,
+        azure_voice: CUSTOM.voice,
       })
     });
 
