@@ -126,7 +126,7 @@ chatButton.onclick = async () => {
   }
 
   var raw = conversation.value;
-  helpMessageInner.innerHTML += `<p class="align-self-end" style="text-align: left; color: black; width: 75%;">${raw}</p>`;
+  helpMessageInner.innerHTML += `<p class="align-self-end" style="text-align: right; width: 75%;">${raw}</p>`;
   helpMessageInner.scrollTo({top: 99999, behavior: 'smooth'});
 
   if (!recognitionState) {
