@@ -212,65 +212,70 @@
 
 
 
-      /*.custom-select {
+      .custom-select {
         position: relative;
         font-family: Arial;
       }
 
       .custom-select select {
-        display: none; /*hide original SELECT element: /
+        display: none; /*hide original SELECT element: */
       }
 
       .select-selected {
-        background-color: DodgerBlue;
+        background-color: white;
+        border: 0.5px solid #C4C4C4;
+        border-radius: 5px;
       }
 
-      /* Style the arrow inside the select element: /
+      /* Style the arrow inside the select element: */
       .select-selected:after {
         position: absolute;
         content: "";
         top: 14px;
         right: 10px;
-        width: 0;
+        /* width: 0;
         height: 0;
         border: 6px solid transparent;
-        border-color: #fff transparent transparent transparent;
+        border-color: #fff transparent transparent transparent; */
+        background-image: url('./icons-down.svg');
       }
 
-      /* Point the arrow upwards when the select box is open (active): /
+      /* Point the arrow upwards when the select box is open (active): */
       .select-selected.select-arrow-active:after {
         border-color: transparent transparent #fff transparent;
         top: 7px;
+        background-image: url('./icons-down.svg');
       }
 
-      /* style the items (options), including the selected item: /
+      /* style the items (options), including the selected item: */
       .select-items div,.select-selected {
-        color: #ffffff;
-        padding: 8px 16px;
+        color: black;
+        padding: 8px 22px;
         border: 1px solid transparent;
         border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
         cursor: pointer;
       }
 
-      /* Style items (options): /
+      /* Style items (options): */
       .select-items {
         position: absolute;
-        background-color: DodgerBlue;
-        top: 100%;
+        background-color: white;
+        top: 50px;
         left: 0;
         right: 0;
         z-index: 99;
+        border-radius: 5px;
       }
 
-      /* Hide the items when the select box is closed: /
+      /* Hide the items when the select box is closed: */
       .select-hide {
         display: none;
       }
 
       .select-items div:hover, .same-as-selected {
-        background-color: rgba(0, 0, 0, 0.1);
-      } */
-
+        background-color: #EFFCFF;
+        border-radius: 5px;
+      }
     </style>
   </head>
 
@@ -287,7 +292,7 @@
               HUM<span style="border-bottom: thin solid black; font-weight: normal;">AI</span>NS
             </span>
           </div>
-          <div class="col-2 offset-7 custom-select" style="text-align: right; width: 200px;">
+          <div class="col-2 offset-7 custom-select px-0" style="width: 165px;">
             <select name="pets" id="pet-select">
               <option value="">Select tool</option>
               <option value="Rephrasing">Rephrasing</option>
@@ -313,7 +318,7 @@
                 <!-- HUMAINS
                 <img src="../images/powered.svg" alt="powered by" class="mb-2" /> -->
                 <div id="tool" style="font: normal normal 300 40px/50px Roboto; letter-spacing: 0px; color: #0EBEEB; opacity: 1;">Copilot</div>
-                <div style="color: white;">Short description of the Copilot tool</div>
+                <div id="tool-description" style="color: white;">Short description of the Copilot tool</div>
               </div>
               <div
                 id="content"
@@ -328,12 +333,6 @@
                   >
                   <div id="help-message-inner" class="py-2 w-100"
                     style="overflow-y: scroll; background-color: rgba(255, 255, 255, .36); border-radius: 10px; height: 400px; border-radius: 5px;">
-                    <div class="d-flex mb-3">
-                      <div class="px-4">
-                        <img src="./bot.png" alt="bot_head" />
-                      </div>
-                      <p class="flex-grow-1" style="color: white;">Send a message or press the microphone to talk</p>
-                    </div>
                   </div>
                 </div>
                 </div>
