@@ -58,7 +58,7 @@ const say = async (input = 'Heavy Metal') => {
     const videoURL = URL.createObjectURL(videoBlob);
 
     if (input) {
-      helpMessageInner.innerHTML += `<p style="clear: both; color: #14C6F1; width: 75%;">${input}</p>`;
+      helpMessageInner.innerHTML += `<p style="color: #14C6F1; width: 75%;">${input}</p>`;
       helpMessageInner.scrollTo({top: 99999, behavior: 'smooth'});
     }
 
@@ -126,7 +126,7 @@ chatButton.onclick = async () => {
   }
 
   var raw = conversation.value;
-  helpMessageInner.innerHTML += `<p style="float: right; color: black; text-align: right; width: 75%;">${raw}</p>`;
+  helpMessageInner.innerHTML += `<p class="align-self-end" style="text-align: right; width: 75%;">${raw}</p>`;
   helpMessageInner.scrollTo({top: 99999, behavior: 'smooth'});
 
   if (!recognitionState) {
