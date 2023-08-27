@@ -10,14 +10,21 @@ let recognized;
 let recognition;
 let recognitionState = false;
 
-let aiResponseGlobal;
+// let aiResponseGlobal;
 const chatWindow = document.getElementById('help-message-inner');
+
 function applyQuestion() {
-  chatWindow.innerHTML = `                    <div class="d-flex mb-3">
+  const text = 'Send a message or press the microphone to talk';
+
+  chatWindow.innerHTML = `<div class="d-flex mb-3">
   <div class="px-4">
     <img src="./bot.png" alt="bot_head" />
   </div>
-  <p class="flex-grow-1" style="color: white;">Send a message or press the microphone to talk</p>
+  <p class="flex-grow-1" style="color: white;">${text}</p>
+  <input id="hidden-element" type="text" class="d-none" value="${text}" />
+  <div class="px-2">
+    <img class="click-to-copy" src="./duplicate.svg" alt="copy" />
+  </div>
 </div>
 `;
 }
@@ -30,6 +37,17 @@ function applyQuestion() {
 addEventListener('load', () => {
   // connect();
   applyQuestion();
+})
+
+const copy = document.getElementsByClassName('click-to-copy');
+
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('click-to-copy')) {
+    const hidden = e.target.parentNode.previousSibling.previousSibling;
+    hidden.select();
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText(hidden.value);  
+  }
 })
 
 // async function connect() {
@@ -135,7 +153,8 @@ chatForm.onsubmit = async (e) => {
   }
 
   var raw = conversation.value;
-  helpMessageInner.innerHTML += `<div class="d-flex mb-3 py-2" style="background-color: rgba(255, 255, 255, .2);"><div class="px-4">
+  helpMessageInner.innerHTML += `<div class="d-flex mb-3 py-2" style="background-color: rgba(255, 255, 255, .2);">
+    <div class="px-4">
                         <img src="./hyundai.png" alt="hyundai" />
                       </div><p style="color: white;">${raw}</p></div>`;
   helpMessageInner.scrollTo({top: 99999, behavior: 'smooth'});
@@ -225,12 +244,21 @@ function ask(raw) {
     })
     .then((result) => {
       // say(result);
-      helpMessageInner.innerHTML += `<div class="d-flex mb-3 py-2"><div class="px-4">
-      <img src="./bot.png" alt="humain" />
-    </div><p style="color: white;">${result}</p></div>`;
+      helpMessageInner.innerHTML += `
+      <div class="d-flex mb-3 py-2">
+        <div class="px-4">
+          <img src="./bot.png" alt="humain" />
+        </div>
+        <p class="flex-grow-1" style="color: white;">${result}</p>
+        <input id="hidden-element" type="text" class="d-none" value="${result}" />
+        <div class="px-2">
+          <img class="click-to-copy" src="./duplicate.svg" alt="copy" />
+        </div>
+      </div>
+`;
       helpMessageInner.scrollTo({top: 99999, behavior: 'smooth'});
 
-      aiResponseGlobal = result;
+      // aiResponseGlobal = result;
       console.log(result);
     })
     .catch((error) => console.log('error: ', error));
@@ -315,7 +343,6 @@ function detectBrowser() {
 
 function clearChat() {
   chatWindow.innerHTML = '';
-  applyQuestion();
 }
 
 let tool = document.getElementById('tool');
@@ -365,6 +392,7 @@ for (i = 0; i < l; i++) {
             toolDescription.innerHTML = CUSTOM[s.value + 'Description'];
             clientId = CUSTOM[s.value.toLowerCase()]
             clearChat();
+            applyQuestion();
 
             y = this.parentNode.getElementsByClassName("same-as-selected");
             yl = y.length;
