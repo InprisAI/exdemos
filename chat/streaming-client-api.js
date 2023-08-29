@@ -16,12 +16,15 @@ const chatWindow = document.getElementById('help-message-inner');
 function applyQuestion() {
   const text = 'Send a message or press the microphone to talk';
 
-  chatWindow.innerHTML = `<div class="d-flex mb-3">
+  chatWindow.innerHTML = `
+<div class="d-flex mb-3">
   <div class="px-4">
     <img src="./bot.png" alt="bot_head" />
   </div>
-  <p class="flex-grow-1" style="color: white;">${text}</p>
-  <input id="hidden-element" type="text" class="d-none" value="${text}" />
+  <div class="d-flex align-items-center flex-grow-1">
+    <div style="color: white;">${text}</div>
+  </div>
+    <input id="hidden-element" type="text" class="d-none" value="${text}" />
   <div class="px-2">
     <img class="click-to-copy" src="./duplicate.svg" alt="copy" />
   </div>
@@ -46,7 +49,7 @@ document.addEventListener('click', (e) => {
     const hidden = e.target.parentNode.previousSibling.previousSibling;
     hidden.select();
     /* Copy the text inside the text field */
-    navigator.clipboard.writeText(hidden.value);  
+    navigator.clipboard.writeText(hidden.value);
   }
 })
 
@@ -94,7 +97,7 @@ document.addEventListener('click', (e) => {
 
 // const talkButton = document.getElementById('talk-button');
 
-const chatButton = document.getElementById('chat-button');
+// const chatButton = document.getElementById('chat-button');
 const chatForm = document.getElementById('chat-form');
 const conversation = document.getElementById('speech');
 const microphoneIcon = document.getElementsByClassName('fa-microphone')[0];
@@ -153,10 +156,15 @@ chatForm.onsubmit = async (e) => {
   }
 
   var raw = conversation.value;
-  helpMessageInner.innerHTML += `<div class="d-flex mb-3 py-2" style="background-color: rgba(255, 255, 255, .2);">
+  helpMessageInner.innerHTML += `
+  <div class="d-flex mb-3 py-2" style="background-color: rgba(255, 255, 255, .2);">
     <div class="px-4">
-                        <img src="./hyundai.png" alt="hyundai" />
-                      </div><p style="color: white;">${raw}</p></div>`;
+      <img src="./hyundai.png" alt="hyundai" />
+    </div>
+    <div class="d-flex align-items-center flex-grow-1">
+      <div style="color: white;">${raw}</div>
+    </div>
+  </div>`;
   helpMessageInner.scrollTo({top: 99999, behavior: 'smooth'});
 
   if (!recognitionState) {
@@ -249,7 +257,9 @@ function ask(raw) {
         <div class="px-4">
           <img src="./bot.png" alt="humain" />
         </div>
-        <p class="flex-grow-1" style="color: white;">${result}</p>
+        <div class="d-flex align-items-center flex-grow-1">
+          <div style="color: white;">${result}</div>
+        </div>
         <input id="hidden-element" type="text" class="d-none" value="${result}" />
         <div class="px-2">
           <img class="click-to-copy" src="./duplicate.svg" alt="copy" />
