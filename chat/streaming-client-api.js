@@ -25,7 +25,7 @@ function applyQuestion() {
     <div style="color: white;">${text}</div>
   </div>
     <input id="hidden-element" type="text" class="d-none" value="${text}" />
-  <div class="px-2">
+  <div class="p-3">
     <img class="click-to-copy" src="./duplicate.svg" alt="copy" />
   </div>
 </div>
@@ -261,7 +261,7 @@ function ask(raw) {
           <div style="color: white;">${result}</div>
         </div>
         <input id="hidden-element" type="text" class="d-none" value="${result}" />
-        <div class="px-2">
+        <div class="p-3">
           <img class="click-to-copy" src="./duplicate.svg" alt="copy" />
         </div>
       </div>
