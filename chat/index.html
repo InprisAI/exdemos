@@ -12,6 +12,8 @@
     />
     <link href="../css/all.min.css" rel="stylesheet">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -88,6 +90,9 @@
       }
 
       /* added csss from here */
+      body {
+        overflow: hidden;
+      }
 
       body * {
         font-family: 'Roboto', sans-serif;
@@ -310,9 +315,9 @@
       </header>
       <div class="row" style="height: calc(100% - 100px);">
         <div class="d-flex justify-content-center align-items-center w-100 h-100">
+          <div style="background: transparent radial-gradient(closest-side at 50% 50%, #204885 0%, #20488500 100%) 0% 0% no-repeat padding-box; position: absolute; height: 700px; width: 70vw; left: auto; right: auto; bottom: -350px;"></div>
           <div
             class="col d-flex justify-content-center"
-            style="background: transparent radial-gradient(closest-side at 50% 50%, #204885 0%, #20488500 100%) 0% 0% no-repeat padding-box;"
           >
             <div class="w-100">
               <div class="mb-3">
@@ -365,7 +370,7 @@
                   Signaling status: <label id="signaling-status-label"></label><br />
                   Streaming status: <label id="streaming-status-label"></label><br />
                 </div> -->
-                <form id="chat-form" class="d-flex mt-3" autocomplete="off">
+                <form id="chat-form" class="d-flex mt-3 position-relative" autocomplete="off">
                   <span>
                     <img src="./hyundai.png" alt="profile" style="width: 45px; border-radius: 50%;" />
                   </span>
@@ -385,5 +390,6 @@
       </div>
     </div>
     <script type="module" src="./index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
   </body>
 </html>

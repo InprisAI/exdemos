@@ -10,6 +10,8 @@ let recognized;
 let recognition;
 let recognitionState = false;
 
+var notyf = new Notyf();
+
 // let aiResponseGlobal;
 const chatWindow = document.getElementById('help-message-inner');
 
@@ -50,6 +52,8 @@ document.addEventListener('click', (e) => {
     hidden.select();
     /* Copy the text inside the text field */
     navigator.clipboard.writeText(hidden.value);
+
+    notyf.success('Copied!');
   }
 })
 
@@ -100,21 +104,21 @@ document.addEventListener('click', (e) => {
 // const chatButton = document.getElementById('chat-button');
 const chatForm = document.getElementById('chat-form');
 const conversation = document.getElementById('speech');
-const microphoneIcon = document.getElementsByClassName('fa-microphone')[0];
-const sendIcon = document.getElementsByClassName('paper-plane')[0];
+// const microphoneIcon = document.getElementsByClassName('fa-microphone')[0];
+// const sendIcon = document.getElementsByClassName('paper-plane')[0];
 let clientId = CUSTOM.copilot;
 
 conversation.addEventListener('input', (event) => {
   if (event.target.value.length > 0) {
     recognitionState = true;
 
-    sendIcon.style.display = 'block';
-    microphoneIcon.style.display = 'none';
+    // sendIcon.style.display = 'block';
+    // microphoneIcon.style.display = 'none';
   }
   else {
     recognitionState = false;
-    sendIcon.style.display = 'none';
-    microphoneIcon.style.display = 'block';
+    // sendIcon.style.display = 'none';
+    // microphoneIcon.style.display = 'block';
   };
 });
 
@@ -129,12 +133,12 @@ chatForm.onsubmit = async (e) => {
   if (recognitionState) {
     if (recognition) recognition.start();
 
-    sendIcon.style.display = 'block';
-    microphoneIcon.style.display = 'none';
+    // sendIcon.style.display = 'block';
+    // microphoneIcon.style.display = 'none';
   }
   else {
-    sendIcon.style.display = 'none';
-    microphoneIcon.style.display = 'block';
+    // sendIcon.style.display = 'none';
+    // microphoneIcon.style.display = 'block';
   }
 
   if (conversation.value.length > 0) {
@@ -146,8 +150,8 @@ chatForm.onsubmit = async (e) => {
     recognitionState = false;
 
     // Refactor
-    sendIcon.style.display = 'none';
-    microphoneIcon.style.display = 'block';
+    // sendIcon.style.display = 'none';
+    // microphoneIcon.style.display = 'block';
 
   }
 
@@ -158,7 +162,7 @@ chatForm.onsubmit = async (e) => {
   var raw = conversation.value;
   helpMessageInner.innerHTML += `
   <div class="d-flex mb-3 py-2" style="background-color: rgba(255, 255, 255, .2);">
-    <div class="px-4">
+    <div class="p-4">
       <img src="./hyundai.png" alt="hyundai" />
     </div>
     <div class="d-flex align-items-center flex-grow-1">
