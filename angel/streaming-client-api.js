@@ -205,7 +205,10 @@ function ask(raw) {
         throw new Error('Network response was not OK');
       }
 
-      conversationId = response.headers.get('Conversation-Id');
+      if (!conversationId) {
+        conversationId = response.headers.get('Conversation-Id');
+        if (!conversationId) conversationId = getToken();
+      }
 
       const buffer = await response.arrayBuffer();
       const decoder = new TextDecoder('utf-8');
@@ -295,4 +298,18 @@ function detectBrowser() {
   }
 
   return browser;
+}
+
+function getToken() {
+  const chars = '0123456789abcdef';
+  let result = '';
+  for (let i = 0; i < 32; i++)
+  {
+      result += chars[getRandomInt(16)];
+  }
+  return result
+}
+
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
 }
