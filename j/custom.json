@@ -1,9 +1,9 @@
 {
     "voice": "he-IL-AvriNeural",
     "voice_name": "Max",
-    "image": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_c59035eded927e9ca12979e94bb290e2.jpg",
-    "video": "sacks.mp4",
-    "humain": "amit:sack5",
+    "image": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_d538803d0174e03de7da5354b0a2e878.jpg",
+    "video": "old_man.mp4",
+    "humain": "amit:j0sef",
     "recognition_lang": "he-IL",
-    "idle_url": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_c59035eded927e9ca12979e94bb290e2.mp4"
+    "idle_url": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_b338bcb4d463e9bb8184971c8861d17a.mp4"
 }
