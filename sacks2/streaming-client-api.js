@@ -20,13 +20,11 @@ let aiResponseGlobal;
   
 const idleUrl = CUSTOM.idle_url;  
   
-document.addEventListener("DOMContentLoaded", function () {  
+window.onload = function () {  
   const talkVideo = document.getElementById('talk-video');  
   const talkVideoStream = document.getElementById('talk-video-stream');  
   
-  addEventListener('load', () => {  
-    connect();  
-  })  
+  connect();  
   
   async function connect() {  
     playIdleVideo();  
@@ -314,4 +312,4 @@ document.addEventListener("DOMContentLoaded", function () {
   function getRandomInt(max) {  
     return Math.floor(Math.random() * Math.floor(max));  
   }  
-});  
+};  
