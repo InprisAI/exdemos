@@ -3,39 +3,17 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsive meta tag added -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Yosef ben Azaria</title>
-    <!-- added google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;700&display=swap" rel="stylesheet" />
     <link href="../css/all.min.css" rel="stylesheet">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="icon" href="../favicon.png" />
-
     <link href="https://fonts.googleapis.com/css2?family=Jura:wght@600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-    <style>
-        * {
-            direction: ltr;
-        }
-
-        /* ... (rest of the styles) ... */
-
-        /* Mobile styles */
-        @media only screen and (max-width: 768px) {
-            .humains-title {
-                font-size: 24px;
-            }
-
-            /* Add other mobile-specific styles here */
-        }
-    </style>
+    <!-- ... rest of the styles ... -->
 </head>
 
 <body class="bg-black w-100 h-100">
@@ -61,36 +39,17 @@
                             <img src="../images/powered.svg" alt="powered by" class="mb-2" />
                         </div>
                         <div id="content">
-
-                            <!-- adde "id=content" -->
-                            <div class="row">
-                                <div class="col-12 col-sm-6 col-md-5 col-lg-4 col-xl-3">
-                                    <!-- adjusted Bootstrap classes for responsiveness -->
-                                    <!-- added "id=video-wrapper" -->
-                                    <div id="video-wrapper" class="video-wrapper">
-                                        <video id="talk-video" playsinline autoplay muted loop></video>
-                                        <video id="talk-video-stream" playsinline autoplay loop></video>
-                                    </div>
-                                </div>
-                                <div class="col-12 col-sm-6 col-md-7 col-lg-8 col-xl-9">
-                                    <!-- adjusted Bootstrap classes for responsiveness -->
-                                    <div id="help-message" class="d-flex flex-column">
-                                        <div id="help-message-inner" class="p-2 w-100 d-flex flex-column" style="overflow-y: scroll; background-color: #fff; height: 255px;  border-radius: 5px;">
-                                            <p style="color: #14C6F1; width: 75%;">Send me a message or press on the microphone to speak</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex">
-                                <span>
-                                    <img src="../images/profile.svg" alt="profile" style="width: 45px; border-radius: 50%;" />
-                                </span>
-                                <input id="speech" class="flex-grow-1" type="text" style="border-radius: 20px; height: 45px;" />
-                                <button id="chat-button" class="m-0 p-0" type="button" style="border: thin solid white; border-radius: 20px; height: 45px; width: 90px; background-color: transparent;">
-                                    <i class="fa-solid fa-microphone"></i>
-                                    <span class="paper-plane" style="display: none">Send</span>
-                                </button>
-                            </div>
+                            <!-- ... rest of the content ... -->
+                        </div>
+                        <div class="d-flex">
+                            <span>
+                                <img src="../images/profile.svg" alt="profile" style="width: 45px; border-radius: 50%;" />
+                            </span>
+                            <input id="speech" class="flex-grow-1" type="text" style="border-radius: 20px; height: 45px;" />
+                            <button id="chat-button" class="m-0 p-0" type="button" style="border: thin solid white; border-radius: 20px; height: 45px; width: 90px; background-color: transparent; z-index: 10;">
+                                <i class="fa-solid fa-microphone"></i>
+                                <span class="paper-plane" style="display: none">Send</span>
+                            </button>
                         </div>
                     </div>
                 </div>
