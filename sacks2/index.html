@@ -206,33 +206,35 @@
         background-color: #CFCFCF;  
       }  
   
-      /* Add Media Query for Mobile View */  
-      @media (max-width: 767px) {  
-        /* Adjust the video-wrapper and help-message columns to take full width */  
-        .row > .col-xs-12 {  
-          flex: 0 0 100%;  
-          max-width: 100%;  
-        }  
+@media (max-width: 991px) {  
+  /* Adjust the video-wrapper and help-message columns to take full width */  
+  .row > .col-xs-12 {  
+    flex: 0 0 100%;  
+    max-width: 100%;  
+  }  
   
-        /* Add some space between the video-wrapper and help-message */  
-        #video-wrapper {  
-          margin-bottom: 20px;  
-        }  
+  /* Add some space between the video-wrapper and help-message */  
+  #video-wrapper {  
+    margin-bottom: 20px;  
+  }  
   
-        /* Adjust the chat input area to be centered and full width */  
-        .d-flex {  
-          flex-direction: column;  
-          align-items: center;  
-        }  
+  /* Adjust the chat input area to be centered and full width */  
+  .d-flex {  
+    flex-direction: column;  
+    align-items: center;  
+  }  
   
-        #speech {  
-          margin-bottom: 10px;  
-          width: 100%;  
-        }  
+  #speech {  
+    margin-bottom: 10px;  
+    width: 100%;  
+  }  
   
-        /* Adjust button style */  
-        #chat-button {  
-          width: 100%;  
+  /* Adjust button style */  
+  #chat-button {  
+    width: 100%;  
+  }  
+}  
+
         }  
       }  
     </style>  
