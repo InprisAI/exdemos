@@ -1,0 +1,9 @@
+{
+    "voice": "en-GB-ElliotNeural",
+    "voice_name": "Elliot",
+    "image": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_c59035eded927e9ca12979e94bb290e2.jpg",
+    "video": "sacks.mp4",
+    "humain": "amit:sack5",
+    "recognition_lang": "en-GB",
+    "idle_url": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_c59035eded927e9ca12979e94bb290e2.mp4"
+}
