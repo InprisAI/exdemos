@@ -2,6 +2,7 @@
 <html class="w-100 h-100">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>יוסף בן עזריה</title>
     <!-- added google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -139,7 +140,7 @@
 
       #video-wrapper {
         /* background: url(bg.png); */
-        height: 270px;
+        height: 390px;
         background-position: top;
       }
 
@@ -148,11 +149,13 @@
         margin: 0 auto;
         padding: 50px 0 0 0;
       }
+
       video {
         display: block;
-        /*border:1px solid;*/
-        border-radius: 5px;
+        /* border-radius: 5px; */
         background-color: #000;
+        width: 100%;
+        max-height: 440px;
       }
 
       #speech {
@@ -180,7 +183,8 @@
       }
 
       .radial-gradient {
-        background: transparent radial-gradient(closest-side at 50% 50%, #204885 0%, #20488500 100%) 0% 0% no-repeat padding-box;
+        display: none;
+        /* background: transparent radial-gradient(closest-side at 50% 50%, #204885 0%, #20488500 100%) 0% 0% no-repeat padding-box; */
       }
 
       .humains-title {
@@ -205,31 +209,71 @@
         -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
         background-color: #CFCFCF;
       }
+
+      .logo {
+        width: 48px;
+      }
+
+      #help-message-inner {
+        height: 165px;
+      }
+
+      #chat-button {
+        color: white;
+        width: 100%;
+      }
+
+      .chat-bot-background {
+        background-color: rgba(225, 225, 225, 1);
+      }
+
+      @media screen and (min-width: 576px) {
+        #video-wrapper {
+          /* background: url(bg.png); */
+          height: 270px;
+          background-position: top;
+        }
+
+        video {
+          border-radius: 5px;
+          width: unset;
+        }
+
+        .logo {
+          width: 70px;
+        }
+
+        #help-message-inner {
+          height: 255px;
+        }
+
+        .radial-gradient {
+          background: transparent radial-gradient(closest-side at 50% 50%, #204885 0%, #20488500 100%) 0% 0% no-repeat padding-box;
+        }
+
+        #chat-button {
+          width: 90px;
+        }
+      }
     </style>
   </head>
 
   <body class="bg-black w-100 h-100">
     <div class="container w-100 h-100">
-      <header class="pt-4">
+      <header class="my-1 my-md-4">
         <div class="row text-white">
           <div class="col offset-md-5">
-            <img src="../images/logo.svg" alt="logo" />
+            <img src="../images/logo.svg" class="logo" alt="logo" />
           </div>
-          <div class="col">Home</div>
-          <div class="col">About</div>
-          <div class="col">Places</div>
-          <div class="col">Careers</div>
-          <div class="col">Blog</div>
         </div>
       </header>
       <div class="row" style="height: calc(100% - 100px);">
-        <div class="d-flex justify-content-center align-items-center w-100 h-100">
+        <div class="d-flex justify-content-center align-items-sm-center w-100 h-100">
           <div
-            class="col d-flex justify-content-center"
-            style="background: transparent radial-gradient(closest-side at 50% 50%, #204885 0%, #20488500 100%) 0% 0% no-repeat padding-box;"
+            class="col d-flex justify-content-center radial-gradient"
           >
             <div class="w-100">
-              <div class="humains-title mb-3 d-flex justify-content-between">
+              <div class="humains-title mb-3 d-none d-sm-flex justify-content-between ">
                 HUMAINS
                 <img src="../images/powered.svg" alt="powered by" class="mb-2" />
               </div>
@@ -239,20 +283,31 @@
 
               <!-- adde "id=content" -->
               <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4 col-xl-3">
+                <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4 col-xl-3 m-0 p-0">
                   <!-- added "id=video-wrapper" -->
                   <div id="video-wrapper" class="video-wrapper">
                     <video id="talk-video" playsinline autoplay muted loop></video>
                     <video id="talk-video-stream" playsinline autoplay loop></video>
                   </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8 col-xl-9">
+                <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8 col-xl-9 m-0 p-0 mb-3">
+                  <div class="d-sm-none">
+                    <img src="../images/powered.svg" alt="powered by" class="m-2" />
+                  </div>
                   <div
                     id="help-message"
                     class="d-flex flex-column"
                   >
-                    <div id="help-message-inner" class="p-2 w-100 d-flex flex-column" style="overflow-y: scroll; background-color: #fff; height: 255px;  border-radius: 5px;">
-                      <p style="color: #14C6F1; width: 75%;">שלח לי הודעה או לחץ על המיקרופון כדי לדבר</p>
+                    <div id="help-message-inner" class="p-0 w-100 d-flex flex-column" style="overflow-y: scroll; background-color: #fff; border-radius: 5px;">
+                      <div class="d-flex py-2 chat-bot-background">
+                        <div class="px-4">
+                          <img src="./yair.jpg" style="width: 40px; border-radius: 50%;" alt="bot_head" />
+                        </div>
+                        <div class="d-flex align-items-center flex-grow-1">
+                          <div>שלח לי הודעה כדי לדבר</div>
+                        </div>
+                      </div>
+                      <!-- <p style="color: #14C6F1;">שלח לי הודעה כדי לדבר</p> -->
                     </d>
                   </div>
                 </div>
@@ -274,20 +329,20 @@
                   Signaling status: <label id="signaling-status-label"></label><br />
                   Streaming status: <label id="streaming-status-label"></label><br />
                 </div> -->
-                <div class="d-flex">
+                <form id="chat-form" class="d-flex flex-wrap flex-sm-nowrap" autocomplete="off">
                   <span>
-                    <img src="../images/profile.svg" alt="profile" style="width: 45px; border-radius: 50%;" />
+                    <img src="./student_user.svg" alt="profile" style="width: 45px; border-radius: 50%;" />
                   </span>
-                  <input id="speech" class="flex-grow-1" type="text" style="border-radius: 20px; height: 45px;"/>
+                  <input id="speech" class="flex-grow-1" type="text" style="border-radius: 20px; height: 45px;" autocomplete="off" />
                   <button
+                    type="submit"
                     id="chat-button"
-                    class="m-0 p-0"
+                    class="m-0 my-2 p-0 my-sm-0"
                     type="button"
-                    style="border: thin solid white; border-radius: 20px; height: 45px; width: 90px; background-color: transparent;">
-                    <i class="fa-solid fa-microphone"></i>
-                    <span class="paper-plane" style="display: none">שלח</span>
+                    style="border: thin solid #14C6F1; border-radius: 20px; height: 45px; background-color: #14C6F1;">
+                    שלח
                   </button>
-                </div>
+                </form>
               </div>
             </div>
           </div>

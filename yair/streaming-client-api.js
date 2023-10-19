@@ -58,7 +58,17 @@ const say = async (input = 'Heavy Metal') => {
     const videoURL = URL.createObjectURL(videoBlob);
 
     if (input) {
-      helpMessageInner.innerHTML += `<p style="color: #14C6F1; width: 75%;">${input}</p>`;
+      // helpMessageInner.innerHTML += `<p style="color: #14C6F1; width: 75%;">${input}</p>`;
+      helpMessageInner.innerHTML += `
+      <div class="d-flex py-2 chat-bot-background">
+        <div class="px-4">
+          <img src="./yair.jpg" style="width: 40px; border-radius: 50%;" alt="humain" />
+        </div>
+        <div class="d-flex align-items-center flex-grow-1">
+          <div>${input}</div>
+        </div>
+      </div>
+      `;
       helpMessageInner.scrollTo({top: 99999, behavior: 'smooth'});
     }
 
@@ -71,27 +81,31 @@ const say = async (input = 'Heavy Metal') => {
 
 const talkButton = document.getElementById('talk-button');
 
-const chatButton = document.getElementById('chat-button');
+// const chatButton = document.getElementById('chat-button');
+const chatForm = document.getElementById('chat-form');
 const conversation = document.getElementById('speech');
 const microphoneIcon = document.getElementsByClassName('fa-microphone')[0];
-const sendIcon = document.getElementsByClassName('paper-plane')[0];
+// const sendIcon = document.getElementsByClassName('paper-plane')[0];
 
-conversation.addEventListener('input', (event) => {
-  if (event.target.value.length > 0) {
-    recognitionState = true;
+// conversation.addEventListener('input', (event) => {
+//   if (event.target.value.length > 0) {
+//     recognitionState = true;
 
-    sendIcon.style.display = 'block';
-    microphoneIcon.style.display = 'none';
-  }
-  else {
-    recognitionState = false;
-    sendIcon.style.display = 'none';
-    microphoneIcon.style.display = 'block';
-  };
-});
+//     sendIcon.style.display = 'block';
+//     microphoneIcon.style.display = 'none';
+//   }
+//   else {
+//     recognitionState = false;
+//     sendIcon.style.display = 'none';
+//     microphoneIcon.style.display = 'block';
+//   };
+// });
 
 const helpMessageInner = document.getElementById('help-message-inner');
-chatButton.onclick = async () => {
+// chatButton.onclick = async () => {
+chatForm.onsubmit = async (e) => {
+  e.preventDefault();
+
   recognitionState = !recognitionState;
   // TODO: Refactor
 
@@ -99,12 +113,12 @@ chatButton.onclick = async () => {
   if (recognitionState) {
     if (recognition) recognition.start();
 
-    sendIcon.style.display = 'block';
-    microphoneIcon.style.display = 'none';
+    // sendIcon.style.display = 'block';
+    // microphoneIcon.style.display = 'none';
   }
   else {
-    sendIcon.style.display = 'none';
-    microphoneIcon.style.display = 'block';
+    // sendIcon.style.display = 'none';
+    // microphoneIcon.style.display = 'block';
   }
 
   if (conversation.value.length > 0) {
@@ -116,8 +130,8 @@ chatButton.onclick = async () => {
     recognitionState = false;
 
     // Refactor
-    sendIcon.style.display = 'none';
-    microphoneIcon.style.display = 'block';
+    // sendIcon.style.display = 'none';
+    // microphoneIcon.style.display = 'block';
 
   }
 
@@ -126,7 +140,17 @@ chatButton.onclick = async () => {
   }
 
   var raw = conversation.value;
-  helpMessageInner.innerHTML += `<p class="align-self-end" style="text-align: left; color: black; width: 75%;">${raw}</p>`;
+  // helpMessageInner.innerHTML += `<p class="align-self-end" style="text-align: left; color: black; width: 75%;">${raw}</p>`;
+  helpMessageInner.innerHTML += `
+  <div class="d-flex py-2" style="background-color: rgba(255, 255, 255, .2);">
+    <div class="px-4">
+      <img style="width: 40px; border-radius: 50%;" src="./student_user.svg" alt="hyundai" />
+    </div>
+    <div class="d-flex align-items-center flex-grow-1">
+      <div>${raw}</div>
+    </div>
+  </div>
+  `;
   helpMessageInner.scrollTo({top: 99999, behavior: 'smooth'});
 
   if (!recognitionState) {
