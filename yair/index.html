@@ -231,6 +231,12 @@
         background-color: rgba(225, 225, 225, 1);
       }
 
+      /* .loading {
+        background: #B5B5B5 0% 0% no-repeat padding-box;
+        border-radius: 0px 0px 10px 0px;
+        opacity: 0.2;
+      } */
+
       .loading {
         color: #B3B3B3;
       }
@@ -245,12 +251,12 @@
       @media screen and (min-width: 576px) {
         #video-wrapper {
           /* background: url(bg.png); */
-          height: 270px;
+          height: 256px;
           background-position: top;
         }
 
         video {
-          border-radius: 5px;
+          /* border-radius: 5px; */
           width: unset;
         }
 
@@ -259,7 +265,7 @@
         }
 
         #help-message-inner {
-          height: 300px;
+          height: 285px;
         }
 
         .radial-gradient {
@@ -311,9 +317,7 @@
                     <video id="talk-video" playsinline autoplay muted loop></video>
                     <video id="talk-video-stream" playsinline autoplay loop></video>
                   </div>
-                  <div id="loading" class="loading d-none">
-                    טוען תשובה...
-                  </div>
+                  <div id="loading" class="loading d-none">טוען תשובה...</div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8 col-xl-9 m-0 p-0 mb-3">
                   <div
@@ -336,7 +340,7 @@
                     <span class="ms-1 ms-sm-0">
                       <img src="./student_user.svg" alt="profile" style="width: 45px; border-radius: 50%;" />
                     </span>
-                    <input id="speech" class="flex-grow-1 m-0 p-0 mx-sm-2" type="text" style="border-radius: 20px; height: 45px;" autocomplete="off" />
+                    <input id="speech" class="flex-grow-1 m-0 px-3 mx-sm-2" type="text" style="border-radius: 20px; height: 45px;" autocomplete="off" />
                     <button
                       type="submit"
                       id="chat-button"
