@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>יוסף בן עזריה</title>
+    <title>יאיר</title>
     <!-- added google fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -159,7 +159,7 @@
       }
 
       #speech {
-        min-width: 80%;
+        /* min-width: 80%; */
         padding-left: 10px;
         padding-right: 10px;
         margin-left: 5px;
@@ -195,6 +195,10 @@
         text-transform: uppercase;
       }
 
+      #help-message {
+        margin-top: 40px;
+      }
+
       #help-message-inner::-webkit-scrollbar {
         width: 10px;
         background-color: #CFCFCF;
@@ -227,6 +231,17 @@
         background-color: rgba(225, 225, 225, 1);
       }
 
+      .loading {
+        color: #B3B3B3;
+      }
+
+      /* #chat-form {
+        background: #2A2A2A 0% 0% no-repeat padding-box;
+        border-radius: 0px 0px 0px 10px;
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+      } */
+
       @media screen and (min-width: 576px) {
         #video-wrapper {
           /* background: url(bg.png); */
@@ -244,7 +259,7 @@
         }
 
         #help-message-inner {
-          height: 255px;
+          height: 300px;
         }
 
         .radial-gradient {
@@ -253,6 +268,10 @@
 
         #chat-button {
           width: 90px;
+        }
+
+        #help-message {
+          margin-top: 0px;
         }
       }
     </style>
@@ -263,7 +282,10 @@
       <header class="my-1 my-md-4">
         <div class="row text-white">
           <div class="col offset-md-5">
-            <img src="../images/logo.svg" class="logo" alt="logo" />
+            <img src="../images/logo.svg" class="logo d-none d-sm-block" alt="logo" />
+            <div class="d-sm-none">
+              <img src="../images/powered.svg" alt="powered by" class="m-2" />
+            </div>
           </div>
         </div>
       </header>
@@ -289,16 +311,16 @@
                     <video id="talk-video" playsinline autoplay muted loop></video>
                     <video id="talk-video-stream" playsinline autoplay loop></video>
                   </div>
+                  <div id="loading" class="loading d-none">
+                    טוען תשובה...
+                  </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8 col-xl-9 m-0 p-0 mb-3">
-                  <div class="d-sm-none">
-                    <img src="../images/powered.svg" alt="powered by" class="m-2" />
-                  </div>
                   <div
                     id="help-message"
                     class="d-flex flex-column"
                   >
-                    <div id="help-message-inner" class="p-0 w-100 d-flex flex-column" style="overflow-y: scroll; background-color: #fff; border-radius: 5px;">
+                    <div id="help-message-inner" class="p-0 w-100 d-flex flex-column mb-3" style="overflow-y: scroll; background-color: #fff; border-radius: 5px;">
                       <div class="d-flex py-2 chat-bot-background">
                         <div class="px-4">
                           <img src="./yair.jpg" style="width: 40px; border-radius: 50%;" alt="bot_head" />
@@ -310,6 +332,20 @@
                       <!-- <p style="color: #14C6F1;">שלח לי הודעה כדי לדבר</p> -->
                     </d>
                   </div>
+                  <form id="chat-form" class="mx-2 mx-sm-0 d-flex flex-wrap flex-sm-nowrap" autocomplete="off">
+                    <span class="ms-1 ms-sm-0">
+                      <img src="./student_user.svg" alt="profile" style="width: 45px; border-radius: 50%;" />
+                    </span>
+                    <input id="speech" class="flex-grow-1 m-0 p-0 mx-sm-2" type="text" style="border-radius: 20px; height: 45px;" autocomplete="off" />
+                    <button
+                      type="submit"
+                      id="chat-button"
+                      class="m-0 my-2 p-0 my-sm-0"
+                      type="button"
+                      style="border-radius: 20px; height: 45px; background-color: #14C6F1;">
+                      שלח
+                    </button>
+                  </form>
                 </div>
               </div>
                 <!-- added div#buttons -->
@@ -329,20 +365,6 @@
                   Signaling status: <label id="signaling-status-label"></label><br />
                   Streaming status: <label id="streaming-status-label"></label><br />
                 </div> -->
-                <form id="chat-form" class="d-flex flex-wrap flex-sm-nowrap" autocomplete="off">
-                  <span>
-                    <img src="./student_user.svg" alt="profile" style="width: 45px; border-radius: 50%;" />
-                  </span>
-                  <input id="speech" class="flex-grow-1" type="text" style="border-radius: 20px; height: 45px;" autocomplete="off" />
-                  <button
-                    type="submit"
-                    id="chat-button"
-                    class="m-0 my-2 p-0 my-sm-0"
-                    type="button"
-                    style="border: thin solid #14C6F1; border-radius: 20px; height: 45px; background-color: #14C6F1;">
-                    שלח
-                  </button>
-                </form>
               </div>
             </div>
           </div>

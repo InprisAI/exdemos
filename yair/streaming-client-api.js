@@ -79,12 +79,12 @@ const say = async (input = 'Heavy Metal') => {
   }
 };
 
-const talkButton = document.getElementById('talk-button');
+// const talkButton = document.getElementById('talk-button');
 
 // const chatButton = document.getElementById('chat-button');
 const chatForm = document.getElementById('chat-form');
 const conversation = document.getElementById('speech');
-const microphoneIcon = document.getElementsByClassName('fa-microphone')[0];
+// const microphoneIcon = document.getElementsByClassName('fa-microphone')[0];
 // const sendIcon = document.getElementsByClassName('paper-plane')[0];
 
 // conversation.addEventListener('input', (event) => {
@@ -102,9 +102,13 @@ const microphoneIcon = document.getElementsByClassName('fa-microphone')[0];
 // });
 
 const helpMessageInner = document.getElementById('help-message-inner');
+const loading = document.getElementById('loading');
 // chatButton.onclick = async () => {
 chatForm.onsubmit = async (e) => {
   e.preventDefault();
+
+  loading.classList.remove('d-none');
+  loading.classList.add('d-block');
 
   recognitionState = !recognitionState;
   // TODO: Refactor
@@ -240,6 +244,9 @@ function ask(raw) {
       return readableString;
     })
     .then((result) => {
+      loading.classList.remove('d-block');
+      loading.classList.add('d-none');
+
       say(result);
       aiResponseGlobal = result;
       console.log(result);
