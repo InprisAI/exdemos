@@ -358,6 +358,17 @@ function getToken() {
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
+
 }
 
 loadJSON();
+
+// document.addEventListener('load', () => {
+
+setTimeout(function() {
+  document.getElementById('speech').value = "שלום";
+  setTimeout(function() {
+    document.getElementById('chat-button').click();
+  }, 100);
+}, 400);
+
