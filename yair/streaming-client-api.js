@@ -274,7 +274,7 @@ function setVideoElement(videoUrl) {
 
   talkVideoStream.classList.remove('item-fade-out');
   talkVideoStream.classList.add('item-fade');
-
+  talkVideoStream.playbackRate = 1.2
   talkVideoStream.style.zIndex = 3;
 
   if (!videoUrl) return;
