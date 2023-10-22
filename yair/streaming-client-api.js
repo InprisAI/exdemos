@@ -281,6 +281,7 @@ function setVideoElement(videoUrl) {
   talkVideoStream.src = videoUrl;
   talkVideoStream.loop = false;
 
+  talkVideoStream.play();
   // safari hotfix
   if (talkVideo.paused) {
     talkVideo
@@ -335,6 +336,9 @@ function detectBrowser() {
   } else if (userAgent.indexOf("Edge") !== -1) {
     browser = "Microsoft Edge";
   } else if (userAgent.indexOf("Safari") !== -1) {
+    talkVideoStream.controls = "";
+    talkVideoStream.muted = "";
+
     browser = "Apple Safari";
   } else if (userAgent.indexOf("Opera") !== -1 || userAgent.indexOf("OPR") !== -1) {
     browser = "Opera";
