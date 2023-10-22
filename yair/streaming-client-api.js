@@ -1,6 +1,18 @@
-'use strict';
-import DID_API from '../api.json' assert { type: 'json' };
-import CUSTOM from './custom.json' assert { type: 'json' };
+// 'use strict';
+// import DID_API from '../api.json';
+// import CUSTOM from './custom.json';
+
+let DID_API;
+let CUSTOM
+
+const loadJSON = async () => {
+  const respo = await fetch("../api.json");
+  DID_API = await respo.json();
+
+  const resp = await fetch("./custom.json");
+  CUSTOM = await resp.json();
+
+console.log(CUSTOM);
 
 if (DID_API.key == '🤫') alert('Please put your api key inside ./api.json and restart..');
 
@@ -23,13 +35,15 @@ const idleUrl = CUSTOM.idle_url;
 const talkVideo = document.getElementById('talk-video');
 const talkVideoStream = document.getElementById('talk-video-stream');
 
-addEventListener('load', () => {
+document.addEventListener('load', () => {
   connect();
-})
+});
 
 async function connect() {
   playIdleVideo();
 }
+
+connect();
 
 talkVideoStream.addEventListener('ended', () => {
   console.log('Ended');
@@ -344,3 +358,6 @@ function getToken() {
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
+}
+
+loadJSON();
