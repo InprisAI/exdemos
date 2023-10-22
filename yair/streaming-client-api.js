@@ -274,7 +274,7 @@ function setVideoElement(videoUrl) {
 
   talkVideoStream.classList.remove('item-fade-out');
   talkVideoStream.classList.add('item-fade');
-
+  talkVideoStream.playbackRate = 1.2
   talkVideoStream.style.zIndex = 3;
 
   if (!videoUrl) return;
@@ -362,6 +362,17 @@ function getToken() {
 function getRandomInt(max) {
   return Math.floor(Math.random() * Math.floor(max));
 }
+
 }
 
 loadJSON();
+
+// document.addEventListener('load', () => {
+
+setTimeout(function() {
+  document.getElementById('speech').value = "שלום";
+  setTimeout(function() {
+    document.getElementById('chat-button').click();
+  }, 100);
+}, 400);
+
