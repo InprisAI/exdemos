@@ -332,6 +332,9 @@ function detectBrowser() {
   if (userAgent.indexOf("Chrome") !== -1) {
     browser = "Google Chrome";
   } else if (userAgent.indexOf("Firefox") !== -1) {
+    talkVideoStream.controls = "";
+    talkVideoStream.muted = "";
+
     browser = "Mozilla Firefox";
   } else if (userAgent.indexOf("Edge") !== -1) {
     browser = "Microsoft Edge";
