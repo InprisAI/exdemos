@@ -6,9 +6,9 @@
     "rephrasing": "hyundai:hyundai_rephrase",
     "copilot": "hyundai:hyundai_copilot",
     "compositor": "hyundai:hyundai_compose",
-    "RephrasingDescription": "Short description of the Rephrasing tool",
-    "CopilotDescription": "Short description of the Copilot tool",
-    "CompositorDescription": "Short description of the Compositor tool",
+    "RephrasingDescription": "Let the Rephrasing tool improve your draft",
+    "CopilotDescription": "Start typing and let the Copilot finish",
+    "CompositorDescription": "Provide a reference and ask the Compositor to change it",
     "recognition_lang": "he-IL",
     "idle_url": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_b338bcb4d463e9bb8184971c8861d17a.mp4"
 }
