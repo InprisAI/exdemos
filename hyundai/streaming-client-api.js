@@ -123,6 +123,7 @@ conversation.addEventListener('input', (event) => {
 });
 
 const helpMessageInner = document.getElementById('help-message-inner');
+const helpMessageMenue = document.getElementById('help-message-menue');
 chatForm.onsubmit = async (e) => {
   e.preventDefault();
 
@@ -222,6 +223,40 @@ const recognitionFactory = () => {
   }
 };
 
+function splitString(input) {
+  // Find all occurrences of [number] pattern
+  const pattern = /\[\d{1,6}\]/g;
+  let match;
+  let lastIndex = 0;
+  let result = [];
+
+  while ((match = pattern.exec(input)) !== null) {
+      // Skip the first match to exclude everything before the first [number]
+      if (lastIndex === 0) {
+          lastIndex = match.index;
+          continue;
+      }
+
+      // Extract substring from lastIndex to current match index
+      let part = input.substring(lastIndex, match.index).trim();
+      if (part) {
+          result.push(part);
+      }
+      lastIndex = match.index;
+  }
+
+  // Add the last part if there's remaining string after the last [number]
+  if (lastIndex < input.length) {
+      let lastPart = input.substring(lastIndex).trim();
+      if (lastPart) {
+          result.push(lastPart);
+      }
+  }
+
+  return result;
+}
+
+
 function ask(raw) {
   console.log('Asking...');
   // return;
@@ -255,7 +290,12 @@ function ask(raw) {
       const buffer = await response.arrayBuffer();
       const decoder = new TextDecoder('utf-8');
       const readableString = decoder.decode(buffer);
-      return readableString;
+
+      var answer = {};
+      answer["answerPart"] = readableString.split('"manual" :')[0];
+      answer["answerVal"] = answer["answerPart"].split('"answer" :')[1];
+      answer["manuelPart"] = readableString.split('"manual" :')[1];
+      return answer;
     })
     .then((result) => {
       // say(result);
@@ -265,15 +305,34 @@ function ask(raw) {
           <img src="./bot.png" alt="humain" />
         </div>
         <div class="d-flex align-items-center flex-grow-1">
-          <div style="color: white;">${result}</div>
+          <div style="color: white;">${result["answerVal"]}</div>
         </div>
-        <input id="hidden-element" type="text" class="d-none" value="${result}" />
+        <input id="hidden-element" type="text" class="d-none" value="${result["answerVal"]}" />
         <div class="p-3">
           <img class="click-to-copy" src="./duplicate.svg" alt="copy" />
         </div>
       </div>
 `;
+      var menueStrings = splitString(result["manuelPart"]);
+      for (let i = 0; i < menueStrings.length; i++) {
+        helpMessageMenue.innerHTML += `
+          <div class="d-flex mb-3 py-2">
+          <div class="px-4">
+            <img src="./bot.png" alt="humain" />
+          </div>
+          <div class="d-flex align-items-center flex-grow-1">
+            <div style="color: white;">${menueStrings[i]}</div>
+          </div>
+          <input id="hidden-element" type="text" class="d-none" value="${menueStrings[i]}" />
+          <div class="p-3">
+            <img class="click-to-copy" src="./duplicate.svg" alt="copy" />
+          </div>
+        </div>
+        `;
+      }
+
       helpMessageInner.scrollTo({top: 99999, behavior: 'smooth'});
+      helpMessageMenue.scrollTo({top: 99999, behavior: 'smooth'});
 
       // aiResponseGlobal = result;
       console.log(result);
