@@ -253,6 +253,11 @@ function splitString(input) {
       }
   }
 
+  if (result[result.length-1].endsWith("]}")) {
+      // Remove the last two characters
+      result[result.length-1] = result[result.length-1].slice(0, -2);
+  }
+
   return result;
 }
 
@@ -293,7 +298,7 @@ function ask(raw) {
 
       var answer = {};
       answer["answerPart"] = readableString.split('"manual" :')[0];
-      answer["answerVal"] = answer["answerPart"].split('"answer" :')[1];
+      answer["answerVal"] = answer["answerPart"].split('"answer" :')[1].slice(0, -2);
       answer["manuelPart"] = readableString.split('"manual" :')[1];
       return answer;
     })
