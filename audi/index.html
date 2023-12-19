@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html class="w-65 h-65">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hyundai AI Writing Assistant</title>
+    <!-- added google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../css/all.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="../favicon.png" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <style>
+      * {
+        direction: ltr;
+      }
+
+      .peerConnectionState-new {
+        color: cornflowerblue;
+      }
+      .peerConnectionState-connecting {
+        color: orange;
+      }
+      .peerConnectionState-connected {
+        color: green;
+      }
+      .peerConnectionState-disconnected,
+      .peerConnectionState-closed,
+      .peerConnectionState-failed {
+        color: red;
+      }
+
+      .iceConnectionState-new {
+        color: cornflowerblue;
+      }
+      .iceConnectionState-checking {
+        color: orange;
+      }
+      .iceConnectionState-connected,
+      .iceConnectionState-completed {
+        color: green;
+      }
+      .peerConnectionState-disconnected,
+      .peerConnectionState-closed,
+      .peerConnectionState-failed {
+        color: red;
+      }
+
+      .iceGatheringState-new {
+        color: cornflowerblue;
+      }
+      .iceGatheringState-gathering {
+        color: orange;
+      }
+      .iceGatheringState-complete {
+        color: black;
+      }
+
+      .signalingState-stable {
+        color: green;
+      }
+      .signalingState-have-local-offer,
+      .signalingState-have-remote-offer,
+      .signalingState-have-local-pranswer,
+      .signalingState-have-remote-pranswer {
+        color: cornflowerblue;
+      }
+      .signalingState-closed {
+        color: red;
+      }
+
+      .streamingState-streaming {
+        color: green;
+      }
+
+      .streamingState-empty {
+        color: grey;
+      }
+
+      /* added csss from here */
+
+      body * {
+        font-family: 'Roboto', sans-serif;
+        /* text-align: center; */
+        outline: none;
+      }
+
+      #content {
+        /* width: 820px;
+        position: relative;
+        margin: 0 auto; */
+      }
+
+      #buttons {
+        clear: both;
+        padding: 0 0 0 0;
+        text-align: center;
+      }
+
+      button {
+        padding: 10px 30px;
+        border-radius: 5px;
+        border: none;
+        font-size: 17px;
+        margin: 0 5px;
+        background-color: #14C6F1;
+        color: #fff;
+      }
+
+      button:hover {
+        background-color: #14C6F1;
+        cursor: pointer;
+        transition: all 0.2s ease-out;
+      }
+
+      #status {
+        clear: both;
+        padding: 20px 0 0 0;
+        text-align: left;
+        display: inline-block;
+        zoom: 1;
+        line-height: 140%;
+        font-size: 15px;
+      }
+
+      #status div {
+        padding-bottom: 10px;
+      }
+
+      #video-wrapper {
+        /* background: url(bg.png); */
+        height: 270px;
+        background-position: top;
+      }
+
+      #video-wrapper div#help-message {
+        width: 400px;
+        margin: 0 auto;
+        padding: 50px 0 0 0;
+      }
+      video {
+        display: block;
+        /*border:1px solid;*/
+        border-radius: 5px;
+        background-color: #000;
+      }
+
+      #speech {
+        width: calc(100% - 60px);
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      .item-fade {
+        position: absolute;
+        display: block;
+        z-index: 2;
+        opacity: 1;
+        transition: opacity .5s ease-in-out 0s;
+      }
+
+      .item-fade-out {
+        position: absolute;
+        display: block;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity .5s ease-in-out 0s;
+      }
+
+      .radial-gradient {
+        /* background: transparent radial-gradient(closest-side at 50% 50%, #204885 0%, #20488500 100%) 0% 0% no-repeat padding-box; */
+      }
+
+      .humains-title {
+        text-align: left;
+        font: normal normal bold 40px/33px Jura;
+        letter-spacing: 0px;
+        color: #FFFFFF;
+        text-transform: uppercase;
+      }
+
+      #help-message-inner::-webkit-scrollbar {
+        width: 10px;
+        background-color: transparent;
+      }
+
+      #help-message-inner::-webkit-scrollbar-thumb {
+        background-color: #14C6F1;
+        border-radius: 10px;
+      }
+
+      #help-message-inner::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        background-color: #CFCFCF;
+        border-radius: 10px;
+      }
+
+
+
+
+
+
+
+      .custom-select {
+        position: relative;
+        font-family: Arial;
+      }
+
+      .custom-select select {
+        display: none; /*hide original SELECT element: */
+      }
+
+      .select-selected {
+        background-color: white;
+        border: 0.5px solid #C4C4C4;
+        border-radius: 5px;
+      }
+
+      /* Style the arrow inside the select element: */
+      .select-selected:after {
+        position: absolute;
+        content: "";
+        top: 14px;
+        right: 10px;
+        width: 0;
+        height: 0;
+        border: 6px solid transparent;
+        border-color: black transparent transparent transparent;
+        /* background-image: url('./icons-down.svg'); */
+      }
+
+      /* Point the arrow upwards when the select box is open (active): */
+      .select-selected.select-arrow-active:after {
+        border-color: transparent transparent black transparent;
+        top: 7px;
+        /* background-image: url('./icons-down.svg'); */
+      }
+
+      /* style the items (options), including the selected item: */
+      .select-items div,.select-selected {
+        color: black;
+        padding: 8px 22px;
+        border: 1px solid transparent;
+        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+        cursor: pointer;
+      }
+
+      /* Style items (options): */
+      .select-items {
+        position: absolute;
+        background-color: white;
+        top: 50px;
+        left: 0;
+        right: 0;
+        z-index: 99;
+        border-radius: 5px;
+      }
+
+      /* Hide the items when the select box is closed: */
+      .select-hide {
+        display: none;
+      }
+
+      .select-items div:hover, .same-as-selected {
+        background-color: #EFFCFF;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+
+  <body class="bg-black w-100 h-100">
+    <div class="container w-100 h-100">
+      <header class="pt-4">
+        <div class="row text-white">
+          <div class="col-3 col-md-1">
+            <img src="../images/logo.svg" alt="logo" />
+          </div>
+          <div class="col-5 col-md-2">
+            <span
+              style="background-color: white; color: black; border-radius: 10px; font: normal normal bold 24px/17px Jura; padding: 10px; display: inline-block;">
+              HUM<span style="border-bottom: thin solid black; font-weight: normal;">AI</span>NS
+            </span>
+          </div>
+          <!-- <div class="col offset-md-5">Home</div>
+          <div class="col">About</div>
+          <div class="col">Places</div>
+          <div class="col">Careers</div>
+          <div class="col">Blog</div> -->
+        </div>
+      </header>
+      <div class="row" style="height: calc(100% - 100px);">
+        <div class="d-flex justify-content-md-center align-items-md-center w-100 h-100">
+          <div style="background: transparent radial-gradient(closest-side at 50% 50%, #204885 0%, #20488500 100%) 0% 0% no-repeat padding-box; position: absolute; height: 700px; width: 70vw; left: auto; right: auto; bottom: -350px; z-index: -1;"></div>
+          <div
+            class="col d-flex justify-content-center"
+          >
+            <div class="w-100">
+              <div class="mb-3">
+                <!-- HUMAINS
+                <img src="../images/powered.svg" alt="powered by" class="mb-2" /> -->
+                <div id="tool" style="font: normal normal 300 40px/50px Roboto; letter-spacing: 0px; color: #0EBEEB; opacity: 1;">Copilot</div>
+                <div id="tool-description" style="color: white; font-weight: 300;">Start typing and let the Copilot finish</div>
+              </div>
+              <div
+                id="content"
+              >
+
+              <!-- adde "id=content" -->
+              <div class="row">
+                <div class="col">
+                  <div
+                    id="help-message"
+                    class="d-flex flex-column"
+                  >
+                  <div id="help-message-inner" class="py-4 w-100"
+                    style="overflow: overlay; background-color: rgba(255, 255, 255, .35); border-radius: 10px; height: 400px; border-radius: 5px;">
+                    <!-- <div class="d-flex mb-3">
+                      <div class="px-4">
+                        <img src="./bot.png" alt="bot_head" />
+                      </div>
+                      <p class="flex-grow-1" style="color: white;">Send a message or press the microphone to talk</p>
+                      <input id="hidden-element" type="text" class="d-none" value="Send a message or press the microphone to talk" />
+                      <div class="px-2">
+                        <img id="click-to-copy" src="./duplicate.svg" alt="copy" />
+                      </div>
+                    </div> --> 
+                  </div>
+                </div>
+                </div>
+              </div>
+                <!-- added div#buttons -->
+                <!-- <div id="buttons">
+                  <button id="connect-button" type="button">Connect</button>
+                  <button id="talk-button" type="button">Start</button>
+                  <button id="destroy-button" type="button">Destroy</button>
+                </div>
+
+                < added div#status >
+                <div id="status">
+                  < removed the wrapping <div> tags >
+                  ICE gathering status: <label id="ice-gathering-status-label"></label
+                  ><br />
+                  ICE status: <label id="ice-status-label"></label><br />
+                  Peer connection status: <label id="peer-status-label"></label><br />
+                  Signaling status: <label id="signaling-status-label"></label><br />
+                  Streaming status: <label id="streaming-status-label"></label><br />
+                </div> -->
+                <br>
+                <div class="row">
+                  <div class="col">
+                    <div
+                      id="help-message-menu"
+                      class="d-flex flex-column"
+                    >
+                    <div id="help-message-menue" class="py-4 w-100"
+                      style="overflow: overlay; background-color: rgba(255, 255, 255, .35); border-radius: 10px; height: 400px; border-radius: 5px;">
+                    </div>
+                  </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <form id="chat-form" class="row mt-3 position-relative" autocomplete="off">
+                      <div class="col-8 col-md-9 col-lg-11">
+                        <img src="./hyundai.png" class="me-2" alt="profile" style="width: 45px; border-radius: 50%;" />
+                        <input id="speech" type="text" autocomplete="false" style="border-radius: 20px; height: 45px;" />
+                      </div>
+                      <div class="col-4 col-md-3 col-lg-1">
+                        <button
+                          type="submit"
+                          id="chat-button"
+                          class="m-0 p-0"
+                          style="width: 100%; max-width: 120px; border-radius: 50px; height: 45px; background-color: #14C6F1;">
+                          <span>Send</span>
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+  </body>
+</html>
