@@ -24,6 +24,8 @@ const RTCPeerConnection = (
 
 let conversationId = null;
 
+let muted = false;
+let botSpeaking = false;
 let recognized;
 let recognition;
 let recognitionState = false;
@@ -34,14 +36,29 @@ const idleUrl = CUSTOM.idle_url;
 
 const talkVideo = document.getElementById('talk-video');
 const talkVideoStream = document.getElementById('talk-video-stream');
+
 const muteButton = document.getElementById('mute-button');
+const volumeHigh = document.getElementById('volume-high');
+const volumeOff = document.getElementById('volume-off');
 
 document.addEventListener('load', () => {
   connect();
 });
 
 muteButton.addEventListener('click', () => {
-  talkVideoStream.pause();
+  muted = !muted;
+
+  if (muted) {
+    talkVideoStream.pause();
+
+    volumeHigh.classList.add('d-none');
+    volumeOff.classList.remove('d-none');
+  } else {
+    talkVideoStream.play();
+
+    volumeHigh.classList.remove('d-none');
+    volumeOff.classList.add('d-none');
+  }
 });
 
 async function connect() {
@@ -98,33 +115,56 @@ const say = async (input = 'Heavy Metal') => {
   }
 };
 
-// const talkButton = document.getElementById('talk-button');
+const talkButton = document.getElementById('talk-button');
 
-// const chatButton = document.getElementById('chat-button');
+const chatButton = document.getElementById('chat-button');
 const chatForm = document.getElementById('chat-form');
 const conversation = document.getElementById('speech');
-// const microphoneIcon = document.getElementsByClassName('fa-microphone')[0];
-// const sendIcon = document.getElementsByClassName('paper-plane')[0];
 
-// conversation.addEventListener('input', (event) => {
-//   if (event.target.value.length > 0) {
-//     recognitionState = true;
+const microphoneIcon = document.getElementById('microphone-icon');
+const sendIcon = document.getElementById('send-icon');
+const ellipsis = document.getElementById('ellipsis');
 
-//     sendIcon.style.display = 'block';
-//     microphoneIcon.style.display = 'none';
-//   }
-//   else {
-//     recognitionState = false;
-//     sendIcon.style.display = 'none';
-//     microphoneIcon.style.display = 'block';
-//   };
-// });
+talkButton.addEventListener('click', async () => {
+  await recognize();
+  // if (recognition) recognition.start();
+  recognized = true;
+  recognitionState = false;
+
+  chatButton.classList.remove('d-none');
+  talkButton.classList.add('d-none');
+
+  submitHandler();
+});
+
+conversation.addEventListener('input', (event) => {
+  if (event.target.value.length > 0) {
+    recognitionState = true;
+
+    // sendIcon.style.display = 'block';
+    // microphoneIcon.style.display = 'none';
+    chatButton.classList.remove('d-none');
+    talkButton.classList.add('d-none');
+  }
+  else {
+    recognitionState = false;
+    // sendIcon.style.display = 'none';
+    // microphoneIcon.style.display = 'block';
+    chatButton.classList.add('d-none');
+    talkButton.classList.remove('d-none');
+  };
+});
 
 const helpMessageInner = document.getElementById('help-message-inner');
 const loading = document.getElementById('loading');
 // chatButton.onclick = async () => {
-chatForm.onsubmit = async (e) => {
-  e.preventDefault();
+const submitHandler = () => {
+  if (conversation.value === '') return;
+
+  // let micOnClicked = false;
+  // if (microphoneIcon.style.display === 'block') {
+  //   micOnClicked = true;
+  // }
 
   loading.classList.remove('d-none');
   loading.classList.add('d-block');
@@ -134,35 +174,44 @@ chatForm.onsubmit = async (e) => {
 
   // If user entered text manually setting it that it was already recognized;
   if (recognitionState) {
-    if (recognition) recognition.start();
-
+    // if (recognition) recognition.start();
+    recognized = true;
     // sendIcon.style.display = 'block';
     // microphoneIcon.style.display = 'none';
+    chatButton.classList.remove('d-none');
+    talkButton.classList.add('d-none');
   }
   else {
-    // sendIcon.style.display = 'none';
-    // microphoneIcon.style.display = 'block';
+    sendIcon.style.display = 'none';
+    microphoneIcon.style.display = 'block';
+    // chatButton.classList.add('d-none');
+    // talkButton.classList.remove('d-none');
   }
 
   if (conversation.value.length > 0) {
     recognized = true;
     recognitionState = false;
   } else {
-    await recognize();
-    recognized = true;
-    recognitionState = false;
+    // if (!muted && !botSpeaking && micOnClicked) {
+    //   await recognize();
+    // }
+
+    // recognized = true;
+    // recognitionState = false;
 
     // Refactor
     // sendIcon.style.display = 'none';
     // microphoneIcon.style.display = 'block';
-
+    chatButton.classList.add('d-none');
+    talkButton.classList.remove('d-none');
   }
 
   if (recognized) {
     if (recognition) recognition.stop();
   }
 
-  var raw = conversation.value;
+  let raw;
+  raw = conversation.value;
   // helpMessageInner.innerHTML += `<p class="align-self-end" style="text-align: left; color: black; width: 75%;">${raw}</p>`;
   helpMessageInner.innerHTML += `
   <div class="d-flex py-2" style="background-color: rgba(255, 255, 255, .2);">
@@ -180,10 +229,18 @@ chatForm.onsubmit = async (e) => {
     ask(raw);
     conversation.value = '';
   }
+}
+
+chatForm.onsubmit = async (e) => {
+  e.preventDefault();
+
+  submitHandler();
 };
 
 async function recognize() {
   return new Promise(async (resolve, reject) => {
+    microphoneIcon.classList.add('d-none');
+    ellipsis.classList.remove('d-none');
     recognitionState = true;
 
     await getLocalStream();
@@ -202,12 +259,16 @@ async function recognize() {
       conversation.value = transcript;
 
       console.log('Recognized speech:', transcript);
+
+      microphoneIcon.classList.remove('d-none');
+      ellipsis.classList.add('d-none');
+  
       resolve(transcript);
     };
 
     recognition.onend = function () {
       console.log('Speech recognition ended.');
-      // recognition.stop();
+      recognition.stop();
     };
   });
 }
@@ -269,11 +330,16 @@ function ask(raw) {
       say(result);
       aiResponseGlobal = result;
       console.log(result);
+
+      chatButton.classList.add('d-none');
+      talkButton.classList.remove('d-none');
     })
     .catch((error) => console.log('error: ', error));
 };
 
 function setVideoElement(videoUrl) {
+  botSpeaking = true;
+
   talkVideo.classList.remove('item-fade');
   talkVideo.classList.add('item-fade-out');
 
@@ -299,6 +365,8 @@ function setVideoElement(videoUrl) {
 }
 
 function playIdleVideo() {
+  botSpeaking = false;
+
   talkVideo.classList.remove('item-fade-out');
   talkVideo.classList.add('item-fade');
 
