@@ -190,7 +190,8 @@ function ask(raw) {
     'Content-Type': 'text/plain',
   };
 
-  if (conversationId) myHeaders['Conversation-Id'] = conversationId;
+  if (!conversationId) conversationId = getToken();
+  myHeaders['Conversation-Id'] = conversationId;
 
   var requestOptions = {
     method: 'POST',
