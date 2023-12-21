@@ -320,20 +320,22 @@ function ask(raw) {
 `;
       var menueStrings = splitString(result["manuelPart"]);
       for (let i = 0; i < menueStrings.length; i++) {
-        helpMessageMenue.innerHTML += `
-          <div class="d-flex mb-3 py-2">
-          <div class="px-4">
-            <img src="./bot.png" alt="humain" />
+        if (menueStrings[i].length > 15){ 
+          helpMessageMenue.innerHTML += `
+            <div class="d-flex mb-3 py-2">
+            <div class="px-4">
+              <img src="./bot.png" alt="humain" />
+            </div>
+            <div class="d-flex align-items-center flex-grow-1">
+              <div style="color: white;">${menueStrings[i]}</div>
+            </div>
+            <input id="hidden-element" type="text" class="d-none" value="${menueStrings[i]}" />
+            <div class="p-3">
+              <img class="click-to-copy" src="./duplicate.svg" alt="copy" />
+            </div>
           </div>
-          <div class="d-flex align-items-center flex-grow-1">
-            <div style="color: white;">${menueStrings[i]}</div>
-          </div>
-          <input id="hidden-element" type="text" class="d-none" value="${menueStrings[i]}" />
-          <div class="p-3">
-            <img class="click-to-copy" src="./duplicate.svg" alt="copy" />
-          </div>
-        </div>
-        `;
+          `;
+        }
       }
 
       helpMessageInner.scrollTo({top: 99999, behavior: 'smooth'});
