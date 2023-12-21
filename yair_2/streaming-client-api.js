@@ -41,9 +41,20 @@ const muteButton = document.getElementById('mute-button');
 const volumeHigh = document.getElementById('volume-high');
 const volumeOff = document.getElementById('volume-off');
 
+const speed = document.getElementById('playback-speed');
+
 let playbackSpeed = 1;
+const playbackSpeedValues = [1, 1.5, 2];
+let playbackSpeedClicked = 0;
+
 document.addEventListener('load', () => {
   connect();
+});
+
+speed.addEventListener('click', () => {
+  playbackSpeedClicked += 1;
+  talkVideoStream.playbackRate = playbackSpeed = playbackSpeedValues[playbackSpeedClicked % 3];
+  speed.innerHTML = playbackSpeedValues[playbackSpeedClicked % 3] + 'x';
 });
 
 muteButton.addEventListener('click', () => {
