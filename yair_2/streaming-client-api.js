@@ -223,7 +223,7 @@ const submitHandler = () => {
   helpMessageInner.innerHTML += `
   <div class="d-flex py-2 align-self-end">
     <span class="d-flex">
-      <span style="background-color: #BCDDE6; padding: 18px; border-radius: 10px; margin-left: 10px; margin-right: 10px;">${raw}</span>
+      <span style="background-color: #fff; padding: 18px; border-radius: 10px; margin-left: 10px; margin-right: 10px;">${raw}</span>
     </span>
   </div>
   `;
