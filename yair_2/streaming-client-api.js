@@ -38,10 +38,14 @@ const talkVideo = document.getElementById('talk-video');
 const talkVideoStream = document.getElementById('talk-video-stream');
 
 const muteButton = document.getElementById('mute-button');
+const muteButtonMobile = document.getElementById('mute-button-mobile');
 const volumeHigh = document.getElementById('volume-high');
 const volumeOff = document.getElementById('volume-off');
+const volumeHighMobile = document.getElementById('volume-high-mobile');
+const volumeOffMobile = document.getElementById('volume-off-mobile');
 
 const speed = document.getElementById('playback-speed');
+const speedMobile = document.getElementById('playback-speed-mobile');
 
 let playbackSpeed = 1;
 const playbackSpeedValues = [1, 1.5, 2];
@@ -51,13 +55,21 @@ document.addEventListener('load', () => {
   connect();
 });
 
-speed.addEventListener('click', () => {
+const speedClick = () => {
   playbackSpeedClicked += 1;
   talkVideoStream.playbackRate = playbackSpeed = playbackSpeedValues[playbackSpeedClicked % 3];
   speed.innerHTML = playbackSpeedValues[playbackSpeedClicked % 3] + 'x';
+};
+
+speed.addEventListener('click', () => {
+  speedClick();
 });
 
-muteButton.addEventListener('click', () => {
+speedMobile.addEventListener('click', () => {
+  speedClick();
+});
+
+const muteButtonClick = () => {
   muted = !muted;
 
   if (muted) {
@@ -65,12 +77,24 @@ muteButton.addEventListener('click', () => {
 
     volumeHigh.classList.add('d-none');
     volumeOff.classList.remove('d-none');
+    volumeHighMobile.classList.add('d-none');
+    volumeOffMobile.classList.remove('d-none');
   } else {
     talkVideoStream.muted = "";
 
     volumeHigh.classList.remove('d-none');
     volumeOff.classList.add('d-none');
+    volumeHighMobile.classList.remove('d-none');
+    volumeOffMobile.classList.add('d-none');
   }
+}
+
+muteButtonMobile.addEventListener('click', () => {
+  muteButtonClick();
+});
+
+muteButton.addEventListener('click', () => {
+  muteButtonClick();
 });
 
 async function connect() {
@@ -140,8 +164,9 @@ talkButton.addEventListener('click', async () => {
   recognized = true;
   recognitionState = false;
 
-  chatButton.classList.remove('d-none');
-  talkButton.classList.add('d-none');
+  // chatButton.classList.remove('d-none');
+  // talkButton.classList.add('d-none');
+  chatForm.submit();
 });
 
 conversation.addEventListener('input', (event) => {
@@ -173,8 +198,7 @@ const submitHandler = () => {
   //   micOnClicked = true;
   // }
 
-  loading.classList.remove('d-none');
-  loading.classList.add('d-block');
+  loading.style.visibility = 'visible';
 
   recognitionState = !recognitionState;
   // TODO: Refactor
@@ -329,8 +353,7 @@ function ask(raw) {
       return readableString;
     })
     .then((result) => {
-      loading.classList.remove('d-block');
-      loading.classList.add('d-none');
+      loading.style.visibility = 'hidden';
 
       say(result);
       aiResponseGlobal = result;
