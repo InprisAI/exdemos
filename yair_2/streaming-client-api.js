@@ -41,7 +41,7 @@ const muteButton = document.getElementById('mute-button');
 const volumeHigh = document.getElementById('volume-high');
 const volumeOff = document.getElementById('volume-off');
 
-let playbackSpeed = 1.5;
+let playbackSpeed = 1;
 document.addEventListener('load', () => {
   connect();
 });
@@ -50,12 +50,12 @@ muteButton.addEventListener('click', () => {
   muted = !muted;
 
   if (muted) {
-    talkVideoStream.pause();
+    talkVideoStream.muted = "muted";
 
     volumeHigh.classList.add('d-none');
     volumeOff.classList.remove('d-none');
   } else {
-    talkVideoStream.play();
+    talkVideoStream.muted = "";
 
     volumeHigh.classList.remove('d-none');
     volumeOff.classList.add('d-none');
