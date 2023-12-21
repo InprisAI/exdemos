@@ -198,6 +198,7 @@
       }
 
       #help-message {
+        border-left: 2px solid #6D6D6D;
         margin-top: 40px;
       }
 
@@ -250,6 +251,14 @@
         padding-bottom: .5rem;
       } */
 
+      .mute-button-background {
+        background: #4D4D4D 0% 0% no-repeat padding-box;
+      }
+
+      .mute-button-background:hover {
+        background: #707070  0% 0% no-repeat padding-box;
+      }
+
       @media screen and (min-width: 576px) {
         #video-wrapper {
           /* background: url(bg.png); */
@@ -258,8 +267,8 @@
         }
 
         video {
-          border-radius: 5px;
-          width: unset;
+          /* border-top-left-radius: 5px; */
+          width: 100%;
         }
 
         .logo {
@@ -267,7 +276,7 @@
         }
 
         #help-message-inner {
-          height: 255px;
+          height: 521px;
         }
 
         .radial-gradient {
@@ -281,6 +290,93 @@
         #help-message {
           margin-top: 0px;
         }
+
+        .background-panel {
+          background: #2A2A2A 0% 0% no-repeat padding-box;
+          border-radius: 10px;
+        }
+      }
+
+
+
+      .custom-select {
+        position: relative;
+        font-family: Arial;
+      }
+
+      .custom-select select {
+        display: none; /*hide original SELECT element: */
+      }
+
+      .select-selected {
+        /* background-color: white; */
+        color: white;
+        border: 0.5px solid #C4C4C4;
+        border-radius: 5px;
+      }
+
+      /* Style the arrow inside the select element: */
+      /* .select-selected:after {
+        position: absolute;
+        content: "";
+        top: 14px;
+        right: 10px;
+        width: 0;
+        height: 0;
+        border: 6px solid transparent;
+        border-color: black transparent transparent transparent;
+        /* background-image: url('./icons-down.svg'); /
+      }
+
+      /* Point the arrow upwards when the select box is open (active): /
+      .select-selected.select-arrow-active:after {
+        border-color: transparent transparent black transparent;
+        top: 7px;
+        /* background-image: url('./icons-down.svg'); /
+      } */
+
+      /* style the items (options), including the selected item: */
+      .select-items div {
+        color: white;
+        padding: 8px 22px;
+        background-color: #707070;
+        border: 1px solid transparent;
+        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+        cursor: pointer;
+      }
+
+      .select-selected {
+        color: white;
+        padding: 8px 22px;
+        border: 1px solid transparent;
+        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+        cursor: pointer;
+      }
+
+      /* Style items (options): */
+      .select-items {
+        position: absolute;
+        background-color: white;
+        top: 50px;
+        left: 0;
+        right: 0;
+        z-index: 99;
+        border-radius: 5px;
+      }
+
+      /* Hide the items when the select box is closed: */
+      .select-hide {
+        display: none;
+      }
+
+      .select-items div:hover {
+        background-color: #707070;
+        /* border-radius: 5px; */
+      }
+
+      .same-as-selected {
+        background-color: #EFFCFF;
+        /* border-radius: 5px; */
       }
     </style>
   </head>
@@ -303,17 +399,16 @@
             class="col d-flex justify-content-center radial-gradient"
           >
             <div class="w-100">
-              <div class="humains-title mb-3 d-none d-sm-flex justify-content-between">
+              <!-- <div class="humains-title mb-3 d-none d-sm-flex justify-content-between">
                 <div>&nbsp;</div>
                 <img src="../images/powered.svg" alt="powered by" class="mb-2" />
-              </div>
-              <div
-                id="content"
-              >
+              </div> -->
+              <div id="content">
 
               <!-- adde "id=content" -->
-              <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4 col-xl-3 m-0 p-0">
+              <div class="row background-panel">
+                <div class="row" style="border-top-right-radius: 10px; border-top-left-radius: 10px;">&nbsp;</div>
+                <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4 col-xl-2 m-0 p-0 d-flex flex-column">
                   <!-- added "id=video-wrapper" -->
                   <div id="video-wrapper" class="video-wrapper">
                     <video id="talk-video" playsinline autoplay muted loop>
@@ -322,44 +417,59 @@
                     <video id="talk-video-stream" playsinline autoplay loop>
                       Your browser does not support the video tag.
                     </video>
-                    <div id="mute-button" class="d-none" style="position: absolute; width: 100%; height: 100%; z-index: 3;">
+                    <!-- <div id="mute-button" class="d-none" style="position: absolute; width: 100%; height: 100%; z-index: 3;">
                       <div class="w-100 h-100" style="position: relative;">
                         <i id="volume-high" class="fa-solid fa-volume-high" style="color: white; position: absolute; left: 10px; bottom: 10px;"></i>
                         <i id="volume-off" class="d-none fa-solid fa-volume-off" style="color: white; position: absolute; left: 10px; bottom: 10px;"></i>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                   <div id="loading" class="loading d-none">טוען תשובה...</div>
+                  <div>
+                    <span id="mute-button" class="ms-2 mute-button-background" style="width: 50px; background: #4D4D4D 0% 0% no-repeat padding-box; border-radius: 50px; padding: 5px; text-align: center;">
+                      <img id="volume-high" src="../images/volume_yair_2.svg"></img>
+                      <img id="volume-off" class="d-none" src="../images/mute_yair_2.svg"></img>
+                    </span>
+                    <span class="custom-select mute-button-background mx-3" style="width: 50px; border-radius: 50px; padding: 5px; text-align: center;">
+                      <select name="pets" id="pet-select">
+                        <option value="1">1x</option>
+                        <option value="1.25">1.25x</option>
+                        <option value="1.5" selected>1.5x</option>
+                      </select>
+                    </span>
+                  </div>        
+                  <div class="row text-white mt-auto">
+                    <div class="col">
+                      <!-- <img src="../images/logo.svg" class="logo d-none d-sm-block" alt="logo" /> -->
+                      <div>
+                        <img src="../images/powered.svg" alt="powered by" class="m-2" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8 col-xl-9 m-0 p-0 mb-3">
+                <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8 col-xl-10 m-0 p-0">
                   <div
                     id="help-message"
                     class="d-flex flex-column"
                   >
-                    <div id="help-message-inner" class="p-0 w-100 d-flex flex-column mb-3" style="overflow-y: scroll; background-color: #fff; border-radius: 5px;">
+                    <div id="help-message-inner" class="p-0 w-100 d-flex flex-column mb-0" style="overflow-y: scroll; background-color: #E1E1E1; border-right-radius: 5px;">
                       <div class="d-flex py-2 chat-bot-background">
-                        <div class="px-4">
-                          <img src="./yair.jpg" style="width: 40px; border-radius: 50%;" alt="bot_head" />
-                        </div>
-                        <div class="d-flex align-items-center flex-grow-1">
-                          <div>שלח לי הודעה כדי לדבר</div>
+                        <div class="d-flex align-items-center">
+                          <span class="mx-4" style="background-color: #BCDDE6; padding: 18px; border-radius: 10px;">Send a message to chat</span>
                         </div>
                       </div>
                       <!-- <p style="color: #14C6F1;">שלח לי הודעה כדי לדבר</p> -->
                     </d>
                   </div>
-                  <form id="chat-form" class="mx-2 mx-sm-0 d-flex flex-sm-nowrap" autocomplete="off">
-                    <span class="me-1 ms-sm-0">
-                      <img src="./student_user.svg" alt="profile" style="width: 45px; border-radius: 50%;" />
-                    </span>
+                  <form id="chat-form" class="mx-2 mx-sm-0 my-2 ps-3 d-flex flex-sm-nowrap" autocomplete="off">
                     <input id="speech" class="flex-md-grow-1 m-0 px-3 mx-sm-2" type="text" style="border-radius: 20px; height: 45px;" autocomplete="off" />
                     <button
                       type="button"
                       id="talk-button"
                       class="m-0 ms-1 me-sm-0 p-0 my-sm-0"
                       type="button"
-                      style="border-radius: 20px; height: 45px; background-color: #14C6F1;">
-                      <i id="microphone-icon" class="fa-solid fa-microphone"></i>
+                      style="border-radius: 20px; height: 45px; background-color: transparent;">
+                      <img src="../images/mic_yair_2.svg" />
                       <i id="ellipsis" class="d-none fa-solid fa-ellipsis"></i>
                     </button>
                     <button
@@ -367,8 +477,10 @@
                       id="chat-button"
                       class="d-none m-0 ms-1 me-sm-0 p-0 my-sm-0"
                       type="button"
-                      style="border-radius: 20px; height: 45px; background-color: #14C6F1;">
-                      <span id="send-icon">שלח</span>
+                      style="border-radius: 20px; height: 45px; background-color: transparent;">
+                      <span id="send-icon">
+                        <img src="../images/send.svg" />
+                      </span>
                     </button>
                   </form>
                 </div>

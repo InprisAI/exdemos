@@ -41,6 +41,7 @@ const muteButton = document.getElementById('mute-button');
 const volumeHigh = document.getElementById('volume-high');
 const volumeOff = document.getElementById('volume-off');
 
+let playbackSpeed = 1.5;
 document.addEventListener('load', () => {
   connect();
 });
@@ -97,12 +98,9 @@ const say = async (input = 'Heavy Metal') => {
       // helpMessageInner.innerHTML += `<p style="color: #14C6F1; width: 75%;">${input}</p>`;
       helpMessageInner.innerHTML += `
       <div class="d-flex py-2 chat-bot-background">
-        <div class="px-4">
-          <img src="./yair.jpg" style="width: 40px; border-radius: 50%;" alt="humain" />
-        </div>
-        <div class="d-flex align-items-center flex-grow-1">
-          <div>${input}</div>
-        </div>
+        <span class="d-flex">
+          <span class="mx-4" style="background-color: #BCDDE6; padding: 18px; border-radius: 10px; max-width: 75%;">${input}</span>
+        </span>
       </div>
       `;
       helpMessageInner.scrollTo({top: 99999, behavior: 'smooth'});
@@ -122,7 +120,7 @@ const chatForm = document.getElementById('chat-form');
 const conversation = document.getElementById('speech');
 
 const microphoneIcon = document.getElementById('microphone-icon');
-const sendIcon = document.getElementById('send-icon');
+// const sendIcon = document.getElementById('send-icon');
 const ellipsis = document.getElementById('ellipsis');
 
 talkButton.addEventListener('click', async () => {
@@ -133,8 +131,6 @@ talkButton.addEventListener('click', async () => {
 
   chatButton.classList.remove('d-none');
   talkButton.classList.add('d-none');
-
-  submitHandler();
 });
 
 conversation.addEventListener('input', (event) => {
@@ -182,10 +178,10 @@ const submitHandler = () => {
     talkButton.classList.add('d-none');
   }
   else {
-    sendIcon.style.display = 'none';
-    microphoneIcon.style.display = 'block';
-    // chatButton.classList.add('d-none');
-    // talkButton.classList.remove('d-none');
+    // sendIcon.style.display = 'none';
+    // microphoneIcon.style.display = 'block';
+    chatButton.classList.add('d-none');
+    talkButton.classList.remove('d-none');
   }
 
   if (conversation.value.length > 0) {
@@ -214,13 +210,10 @@ const submitHandler = () => {
   raw = conversation.value;
   // helpMessageInner.innerHTML += `<p class="align-self-end" style="text-align: left; color: black; width: 75%;">${raw}</p>`;
   helpMessageInner.innerHTML += `
-  <div class="d-flex py-2" style="background-color: rgba(255, 255, 255, .2);">
-    <div class="px-4">
-      <img style="width: 40px; border-radius: 50%;" src="./student_user.svg" alt="hyundai" />
-    </div>
-    <div class="d-flex align-items-center flex-grow-1">
-      <div>${raw}</div>
-    </div>
+  <div class="d-flex py-2 align-self-end">
+    <span class="d-flex">
+      <span style="background-color: #BCDDE6; padding: 18px; border-radius: 10px; margin-left: 10px; margin-right: 10px;">${raw}</span>
+    </span>
   </div>
   `;
   helpMessageInner.scrollTo({top: 99999, behavior: 'smooth'});
@@ -346,9 +339,9 @@ function setVideoElement(videoUrl) {
   talkVideoStream.classList.remove('item-fade-out');
   talkVideoStream.classList.add('item-fade');
   
-  muteButton.classList.remove('d-none');
+  // muteButton.classList.remove('d-none');
 
-  talkVideoStream.playbackRate = 1.2
+  talkVideoStream.playbackRate = playbackSpeed;
   talkVideoStream.style.zIndex = 3;
   
   if (!videoUrl) return;
@@ -373,7 +366,7 @@ function playIdleVideo() {
   talkVideoStream.classList.remove('item-fade');
   talkVideoStream.classList.add('item-fade-out');
   
-  muteButton.classList.add('d-none');
+  // muteButton.classList.add('d-none');
   
   talkVideoStream.style.zIndex = 1;
 
@@ -408,6 +401,9 @@ function detectBrowser() {
 
   if (userAgent.indexOf("Chrome") !== -1) {
     browser = "Google Chrome";
+
+    talkVideoStream.controls = "";
+    talkVideoStream.muted = "";
   } else if (userAgent.indexOf("Firefox") !== -1) {
     talkVideoStream.controls = "";
     talkVideoStream.muted = "";
@@ -415,6 +411,9 @@ function detectBrowser() {
     browser = "Mozilla Firefox";
   } else if (userAgent.indexOf("Edge") !== -1) {
     browser = "Microsoft Edge";
+
+    talkVideoStream.controls = "";
+    talkVideoStream.muted = "";
   } else if (userAgent.indexOf("Safari") !== -1) {
     talkVideoStream.controls = "";
     talkVideoStream.muted = "";
@@ -449,10 +448,105 @@ loadJSON();
 
 // document.addEventListener('load', () => {
 
-setTimeout(function() {
-  document.getElementById('speech').value = "שלום";
-  setTimeout(function() {
-    document.getElementById('chat-button').click();
-  }, 100);
-}, 400);
+// setTimeout(function() {
+//   document.getElementById('speech').value = "שלום";
+//   setTimeout(function() {
+//     document.getElementById('chat-button').click();
+//   }, 100);
+// }, 400);
+
+
+
+
+
+var x, i, j, l, ll, selElmnt, a, b, c;
+/* Look for any elements with the class "custom-select": */
+x = document.getElementsByClassName("custom-select");
+l = x.length;
+for (i = 0; i < l; i++) {
+  selElmnt = x[i].getElementsByTagName("select")[0];
+  ll = selElmnt.length;
+  /* For each element, create a new DIV that will act as the selected item: */
+  a = document.createElement("span");
+  a.setAttribute("class", "select-selected");
+  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+  x[i].appendChild(a);
+  /* For each element, create a new DIV that will contain the option list: */
+  b = document.createElement("DIV");
+  b.setAttribute("class", "select-items select-hide");
+  for (j = 1; j < ll; j++) {
+    /* For each option in the original select element,
+    create a new DIV that will act as an option item: */
+    c = document.createElement("DIV");
+    c.innerHTML = selElmnt.options[j].innerHTML;
+    c.addEventListener("click", function(e) {
+        /* When an item is clicked, update the original select box,
+        and the selected item: */
+        var y, i, k, s, h, sl, yl;
+
+        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+        sl = s.length;
+        h = this.parentNode.previousSibling;
+        for (i = 0; i < sl; i++) {
+          if (s.options[i].innerHTML == this.innerHTML) {
+            s.selectedIndex = i;
+            h.innerHTML = this.innerHTML;
+
+            tool.innerHTML = s.value;
+            toolDescription.innerHTML = CUSTOM[s.value + 'Description'];
+            // clientId = CUSTOM[s.value.toLowerCase()]
+            playbackSpeed = s.value;
+            talkVideoStream.playbackRate = s.value;
+            // clearChat();
+            // applyQuestion();
+
+            y = this.parentNode.getElementsByClassName("same-as-selected");
+            yl = y.length;
+            for (k = 0; k < yl; k++) {
+              y[k].removeAttribute("class");
+            }
+            this.setAttribute("class", "same-as-selected");
+            break;
+          }
+        }
+        h.click();
+    });
+    b.appendChild(c);
+  }
+  x[i].appendChild(b);
+  a.addEventListener("click", function(e) {
+    /* When the select box is clicked, close any other select boxes,
+    and open/close the current select box: */
+    e.stopPropagation();
+    closeAllSelect(this);
+    this.nextSibling.classList.toggle("select-hide");
+    this.classList.toggle("select-arrow-active");
+  });
+}
+
+function closeAllSelect(elmnt) {
+  /* A function that will close all select boxes in the document,
+  except the current select box: */
+  var x, y, i, xl, yl, arrNo = [];
+  x = document.getElementsByClassName("select-items");
+  y = document.getElementsByClassName("select-selected");
+  xl = x.length;
+  yl = y.length;
+  for (i = 0; i < yl; i++) {
+    if (elmnt == y[i]) {
+      arrNo.push(i)
+    } else {
+      y[i].classList.remove("select-arrow-active");
+    }
+  }
+  for (i = 0; i < xl; i++) {
+    if (arrNo.indexOf(i)) {
+      x[i].classList.add("select-hide");
+    }
+  }
+}
+
+/* If the user clicks anywhere outside the select box,
+then close all select boxes: */
+document.addEventListener("click", closeAllSelect);
 
