@@ -59,13 +59,16 @@ const speedClick = () => {
   playbackSpeedClicked += 1;
   talkVideoStream.playbackRate = playbackSpeed = playbackSpeedValues[playbackSpeedClicked % 3];
   speed.innerHTML = playbackSpeedValues[playbackSpeedClicked % 3] + 'x';
+  speedMobile.innerHTML = playbackSpeedValues[playbackSpeedClicked % 3] + 'x';
 };
 
 speed.addEventListener('click', () => {
   speedClick();
 });
 
-speedMobile.addEventListener('click', () => {
+speedMobile.addEventListener('click', (e) => {
+  e.stopPropagation();
+
   speedClick();
 });
 
@@ -89,7 +92,15 @@ const muteButtonClick = () => {
   }
 }
 
-muteButtonMobile.addEventListener('click', () => {
+volumeHighMobile.addEventListener('click', (e) => {
+  e.stopPropagation();
+  
+  muteButtonClick();
+});
+
+volumeOffMobile.addEventListener('click', (e) => {
+  e.stopPropagation();
+  
   muteButtonClick();
 });
 

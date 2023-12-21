@@ -224,15 +224,16 @@
       #help-message-inner {
         height: 165px;
         background-image: url('../images/dots_05.png');
+        background-size: contain;
       }
 
       #chat-button, #talk-button {
         color: white;
-        width: 100%;
+        width: 20%;
       }
 
       .chat-bot-background {
-        background-color: rgba(225, 225, 225, 1);
+        /* background-color: rgba(225, 225, 225, 1); */
       }
 
       /* .loading {
@@ -285,7 +286,7 @@
         }
 
         #chat-button, #talk-button {
-          width: 90px;
+          width: 10%;
         }
 
         #help-message {
@@ -428,11 +429,12 @@
                           <span id="playback-speed-mobile" class="mute-button-background mx-3 px-3" style="border-radius: 50px; padding: 5px; text-align: center; color: white;">
                             1x
                           </span>
+                          <div id="loading-mobile" class="loading d-none">Loading the answer...</div>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div id="loading" class="loading" style="visibility: hidden;">Loading the answer...</div>
+                  <div id="loading" class="loading d-none d-sm-block" style="visibility: hidden;">Loading the answer...</div>
                   <div class="d-none d-sm-block">
                     <span id="mute-button" class="ms-2 mute-button-background" style="width: 50px; background: #4D4D4D 0% 0% no-repeat padding-box; border-radius: 50px; padding: 5px; text-align: center;">
                       <img id="volume-high" src="../images/volume_yair_2.svg"></img>
@@ -464,12 +466,12 @@
                       <!-- <p style="color: #14C6F1;">שלח לי הודעה כדי לדבר</p> -->
                     </d>
                   </div>
-                  <form id="chat-form" class="mx-2 mx-sm-0 my-2 ps-3 d-flex flex-sm-nowrap" autocomplete="off">
-                    <input id="speech" class="flex-md-grow-1 m-0 px-3 mx-sm-2" type="text" style="border-radius: 20px; height: 45px;" autocomplete="off" />
+                  <form id="chat-form" class="mx-2 mx-sm-0 my-2 ps-sm-3 d-flex flex-sm-nowrap" autocomplete="off">
+                    <input id="speech" class="w-100 m-0 px-3 mx-sm-2" type="text" style="border-radius: 20px; height: 45px; flex: 1 1 auto;" autocomplete="off" />
                     <button
                       type="button"
                       id="talk-button"
-                      class="m-0 ms-1 me-sm-0 p-0 my-sm-0"
+                      class="m-0 ms-1 me-sm-0 p-0 my-sm-0 flex-shrink-1"
                       type="button"
                       style="border-radius: 20px; height: 45px; background-color: transparent;">
                       <img id="microphone-icon" src="../images/mic_yair_2.svg" />
