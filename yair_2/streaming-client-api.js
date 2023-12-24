@@ -177,7 +177,7 @@ talkButton.addEventListener('click', async () => {
 
   // chatButton.classList.remove('d-none');
   // talkButton.classList.add('d-none');
-  chatForm.submit();
+  submitHandler();
 });
 
 conversation.addEventListener('input', (event) => {
