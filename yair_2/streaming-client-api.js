@@ -287,7 +287,7 @@ async function recognize() {
 
     await getLocalStream();
 
-    window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+    window.SpeechRecognition =  window.SpeechRecognition  || window.webkitSpeechRecognition;
     
     if ('SpeechRecognition' in window) {
       recognition = new SpeechRecognition();
@@ -312,11 +312,11 @@ async function recognize() {
       microphoneIcon.classList.remove('d-none');
       ellipsis.classList.add('d-none');
   
-      if (conversation.value !== '') recognition.stop();
+      // if (conversation.value !== '') recognition.stop();
       resolve(transcript);
     };
 
-    recognition.onend = function () {
+    recognition.onspeechend = function () {
       console.log('Speech recognition ended.');
       recognition.stop();
     };
