@@ -287,7 +287,7 @@ async function recognize() {
 
     await getLocalStream();
 
-    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
     
     if ('SpeechRecognition' in window) {
       recognition = new SpeechRecognition();
