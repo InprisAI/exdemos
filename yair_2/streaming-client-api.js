@@ -27,7 +27,16 @@ let conversationId = null;
 let muted = false;
 let botSpeaking = false;
 let recognized;
-let recognition;
+
+getLocalStream();
+
+var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+var recognition = new SpeechRecognition();
+
+recognition.lang = CUSTOM.recognition_lang; // Set language (e.g., US English)
+recognition.continuous = false; // Enable continuous recognition
+recognition.interimResults = false; // Get interim results as the user speaks
+
 let recognitionState = false;
 
 let aiResponseGlobal;
@@ -170,14 +179,14 @@ const microphoneIcon = document.getElementById('microphone-icon');
 const ellipsis = document.getElementById('ellipsis');
 
 talkButton.addEventListener('click', async () => {
-  await recognize();
+  recognize();
   // if (recognition) recognition.start();
   recognized = true;
   recognitionState = false;
 
   // chatButton.classList.remove('d-none');
   // talkButton.classList.add('d-none');
-  submitHandler();
+  // submitHandler();
 });
 
 conversation.addEventListener('input', (event) => {
@@ -280,48 +289,41 @@ chatForm.onsubmit = async (e) => {
 };
 
 async function recognize() {
-  return new Promise(async (resolve, reject) => {
-    microphoneIcon.classList.add('d-none');
-    ellipsis.classList.remove('d-none');
-    recognitionState = true;
+  microphoneIcon.classList.add('d-none');
+  ellipsis.classList.remove('d-none');
+  recognitionState = true;
 
-    await getLocalStream();
+  recognition.start();
+}
 
-    window.SpeechRecognition =  window.SpeechRecognition  || window.webkitSpeechRecognition;
-    
-    if ('SpeechRecognition' in window) {
-      recognition = new SpeechRecognition();
-    }
-    else {
-      return;
-    }
-  
-    recognition.lang = CUSTOM.recognition_lang; // Set language (e.g., US English)
-    recognition.continuous = false; // Enable continuous recognition
-    recognition.interimResults = false; // Get interim results as the user speaks
+recognition.onresult = function (event) {
+  const transcript = event.results[0][0].transcript;
+  // const transcript = event.results[event.results.length - 1][0].transcript;
 
-    recognition.start();
+  conversation.value = transcript;
 
-    recognition.onresult = function (event) {
-      const transcript = event.results[0][0].transcript;
-      // const transcript = event.results[event.results.length - 1][0].transcript;
+  console.log('Recognized speech:', transcript);
 
-      conversation.value = transcript;
+  microphoneIcon.classList.remove('d-none');
+  ellipsis.classList.add('d-none');
 
-      console.log('Recognized speech:', transcript);
+  // if (conversation.value !== '') recognition.stop();
+  // resolve(transcript);
+};
 
-      microphoneIcon.classList.remove('d-none');
-      ellipsis.classList.add('d-none');
-  
-      // if (conversation.value !== '') recognition.stop();
-      resolve(transcript);
-    };
+recognition.onspeechend = function () {
+  console.log('Speech recognition ended.');
+  recognition.stop();
 
-    recognition.onspeechend = function () {
-      console.log('Speech recognition ended.');
-      recognition.stop();
-    };
-  });
+  submitHandler();
+};
+
+recognition.onnomatch = function(event) {
+  diagnostic.textContent = "I didn't recognise that color.";
+}
+
+recognition.onerror = function(event) {
+  diagnostic.textContent = 'Error occurred in recognition: ' + event.error;
 }
 
 async function getLocalStream() {
