@@ -287,10 +287,17 @@ async function recognize() {
 
     await getLocalStream();
 
-    recognition = recognitionFactory();
-
+    window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    
+    if ('SpeechRecognition' in window) {
+      recognition = new SpeechRecognition();
+    }
+    else {
+      return;
+    }
+  
     recognition.lang = CUSTOM.recognition_lang; // Set language (e.g., US English)
-    recognition.continuous = true; // Enable continuous recognition
+    recognition.continuous = false; // Enable continuous recognition
     recognition.interimResults = false; // Get interim results as the user speaks
 
     recognition.start();
@@ -321,14 +328,25 @@ async function getLocalStream() {
 }
 
 const recognitionFactory = () => {
-  const detectedBrowser = detectBrowser();
+  // const detectedBrowser = detectBrowser();
 
-  switch (detectedBrowser) {
-    case 'Google Chrome':
-      return new webkitSpeechRecognition(); // Chrome
-    default:
-      return new SpeechRecognition(); // Firefox, Edge
-  }
+  // switch (detectedBrowser) {
+  //   case 'Google Chrome':
+  //     return new webkitSpeechRecognition(); // Chrome
+  //   default:
+  //     return new SpeechRecognition(); // Firefox, Edge
+  // }
+
+  // window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  // let recognition;
+  // if ('SpeechRecognition' in window) {
+  //   recognition = new SpeechRecognition();
+  // }
+  // else {
+  //   throw
+  // }
+
+  return recognition
 };
 
 function ask(raw) {
