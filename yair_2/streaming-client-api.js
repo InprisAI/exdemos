@@ -309,14 +309,14 @@ recognition.onresult = function (event) {
 
   // if (conversation.value !== '') recognition.stop();
   // resolve(transcript);
+
+  submitHandler();
 };
 
 recognition.onspeechend = function () {
-  alert('some message');
   console.log('Speech recognition ended.');
   recognition.stop();
 
-  submitHandler();
 };
 
 recognition.onnomatch = function(event) {
