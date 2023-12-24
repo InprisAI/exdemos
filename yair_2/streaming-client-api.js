@@ -273,6 +273,9 @@ const submitHandler = () => {
 chatForm.onsubmit = async (e) => {
   e.preventDefault();
 
+  microphoneIcon.classList.remove('d-none');
+  ellipsis.classList.add('d-none');
+
   submitHandler();
 };
 
