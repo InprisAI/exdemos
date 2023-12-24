@@ -312,6 +312,7 @@ recognition.onresult = function (event) {
 };
 
 recognition.onspeechend = function () {
+  alert('some message');
   console.log('Speech recognition ended.');
   recognition.stop();
 
