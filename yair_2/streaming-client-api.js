@@ -273,7 +273,7 @@ const submitHandler = () => {
   raw = conversation.value;
   // helpMessageInner.innerHTML += `<p class="align-self-end" style="text-align: left; color: black; width: 75%;">${raw}</p>`;
   helpMessageInner.innerHTML += `
-  <div class="d-flex align-self-end">
+  <div class="d-flex align-self-end my-3">
     <span class="d-flex">
       <span style="background-color: #fff; padding: 18px; border-radius: 10px;">${raw}</span>
     </span>
