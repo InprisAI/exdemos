@@ -46,6 +46,8 @@ const idleUrl = CUSTOM.idle_url;
 const talkVideo = document.getElementById('talk-video');
 const talkVideoStream = document.getElementById('talk-video-stream');
 
+detectBrowser();
+
 const muteButton = document.getElementById('mute-button');
 const muteButtonMobile = document.getElementById('mute-button-mobile');
 const volumeHigh = document.getElementById('volume-high');
@@ -66,10 +68,16 @@ document.addEventListener('load', () => {
 
 const speedClick = () => {
   playbackSpeedClicked += 1;
-  talkVideoStream.playbackRate = playbackSpeed = playbackSpeedValues[playbackSpeedClicked % 3];
+  
+  playbackSpeed = playbackSpeedValues[playbackSpeedClicked % 3];
+  talkVideoStream.playbackRate = playbackSpeed;
   speed.innerHTML = playbackSpeedValues[playbackSpeedClicked % 3] + 'x';
   speedMobile.innerHTML = playbackSpeedValues[playbackSpeedClicked % 3] + 'x';
 };
+
+const setPlaybackRate = (playbackRate) => {
+  talkVideoStream.playbackRate = playbackRate;
+}
 
 speed.addEventListener('click', () => {
   speedClick();
@@ -152,9 +160,9 @@ const say = async (input = 'Heavy Metal') => {
     if (input) {
       // helpMessageInner.innerHTML += `<p style="color: #14C6F1; width: 75%;">${input}</p>`;
       helpMessageInner.innerHTML += `
-      <div class="d-flex py-2 chat-bot-background">
+      <div class="d-flex chat-bot-background">
         <span class="d-flex">
-          <span class="mx-4" style="background-color: #BCDDE6; padding: 18px; border-radius: 10px; max-width: 75%;">${input}</span>
+          <span style="background-color: #BCDDE6; padding: 18px; border-radius: 10px; max-width: 75%;">${input}</span>
         </span>
       </div>
       `;
@@ -265,9 +273,9 @@ const submitHandler = () => {
   raw = conversation.value;
   // helpMessageInner.innerHTML += `<p class="align-self-end" style="text-align: left; color: black; width: 75%;">${raw}</p>`;
   helpMessageInner.innerHTML += `
-  <div class="d-flex py-2 align-self-end">
+  <div class="d-flex align-self-end">
     <span class="d-flex">
-      <span style="background-color: #fff; padding: 18px; border-radius: 10px; margin-left: 10px; margin-right: 10px;">${raw}</span>
+      <span style="background-color: #fff; padding: 18px; border-radius: 10px;">${raw}</span>
     </span>
   </div>
   `;
@@ -427,6 +435,10 @@ function setVideoElement(videoUrl) {
       .catch((e) => {});
   }
 }
+
+talkVideoStream.onplay(() => {
+  setPlaybackRate(playbackSpeed);
+});
 
 function playIdleVideo() {
   botSpeaking = false;
