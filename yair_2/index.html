@@ -256,10 +256,15 @@
 
       .mute-button-background {
         background: #4D4D4D 0% 0% no-repeat padding-box;
+        width: 40px;
       }
 
       .mute-button-background:hover {
         background: #707070  0% 0% no-repeat padding-box;
+      }
+
+      .button {
+        height: 40px;
       }
 
       @media screen and (min-width: 576px) {
@@ -425,11 +430,11 @@
                     <div id="mute-button-mobile" class="d-sm-none" style="position: absolute; width: 100%; height: 100%; z-index: 3;">
                       <div class="w-100 h-100" style="position: relative;">
                         <div style="position: absolute; bottom: 0;">
-                          <span id="mute-button-mobile" class="ms-2 mute-button-background" style="width: 50px; background: #4D4D4D 0% 0% no-repeat padding-box; border-radius: 50px; padding: 5px; text-align: center;">
+                          <span id="mute-button-mobile" class="ms-2 mute-button-background button" style="width: 40px; height: 40px; background: #4D4D4D 0% 0% no-repeat padding-box; border-radius: 50px; padding: 5px; text-align: center;">
                             <img id="volume-high-mobile" src="../images/volume_yair_2.svg"></img>
                             <img id="volume-off-mobile" class="d-none" src="../images/mute_yair_2.svg"></img>
                           </span>
-                          <span id="playback-speed-mobile" class="mute-button-background mx-3 px-3" style="border-radius: 50px; padding: 5px; text-align: center; color: white;">
+                          <span id="playback-speed-mobile" class="mute-button-background mx-3 px-3 button" style="border-radius: 50px; padding: 5px; text-align: center; color: white;">
                             1x
                           </span>
                           <div id="loading-mobile" class="loading d-none">Loading the answer...</div>
@@ -438,14 +443,14 @@
                     </div>
                   </div>
                   <div class="d-flex flex-column flex-grow-1" style="margin: 15px;">
-                    <div class="d-none d-sm-block mb-auto">
-                      <span id="mute-button" class="mute-button-background" style="width: 50px; background: #4D4D4D 0% 0% no-repeat padding-box; padding: 5px; border-radius: 50px; text-align: center;">
-                        <img id="volume-high" src="../images/volume_yair_2.svg"></img>
-                        <img id="volume-off" class="d-none" src="../images/mute_yair_2.svg"></img>
-                      </span>
-                      <span id="playback-speed" class="mute-button-background mx-3 px-3" style="border-radius: 50px; padding: 5px; text-align: center; color: white;">
-                        1x
-                      </span>
+                    <div class="d-none d-sm-flex mb-auto">
+                      <div id="mute-button" class="mute-button-background button" style="height: 40px; width: 40px; background: #4D4D4D 0% 0% no-repeat padding-box; padding: 5px; border-radius: 50px; text-align: center;">
+                        <img id="volume-high" src="../images/volume_yair_2.svg" style="height: 20px;"></img>
+                        <img id="volume-off" class="d-none" src="../images/mute_yair_2.svg" style="height: 20px;"></img>
+                      </div>
+                      <div class="mute-button-background mx-3 px-3 button" style="border-radius: 50px; padding: 5px; text-align: center; color: white;">
+                        <div  id="playback-speed" class="d-flex align-items-center justify-content-center" style="font-size: 20px;">1x</div>
+                      </div>
                     </div>
                     <div id="loading" class="loading d-none d-sm-block mt-auto" style="visibility: hidden;">Loading the answer...</div>
                     <div class="row text-white">
