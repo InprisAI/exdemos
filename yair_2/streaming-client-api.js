@@ -160,7 +160,7 @@ const say = async (input = 'Heavy Metal') => {
     if (input) {
       // helpMessageInner.innerHTML += `<p style="color: #14C6F1; width: 75%;">${input}</p>`;
       helpMessageInner.innerHTML += `
-      <div class="d-flex chat-bot-background">
+      <div class="d-flex chat-bot-background mb-2">
         <span class="d-flex">
           <span style="background-color: #BCDDE6; padding: 18px; border-radius: 10px; max-width: 75%;">${input}</span>
         </span>
@@ -273,7 +273,7 @@ const submitHandler = () => {
   raw = conversation.value;
   // helpMessageInner.innerHTML += `<p class="align-self-end" style="text-align: left; color: black; width: 75%;">${raw}</p>`;
   helpMessageInner.innerHTML += `
-  <div class="d-flex align-self-end my-3">
+  <div class="d-flex align-self-end mb-3">
     <span class="d-flex">
       <span style="background-color: #fff; padding: 18px; border-radius: 10px;">${raw}</span>
     </span>
