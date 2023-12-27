@@ -16,12 +16,6 @@ console.log(CUSTOM);
 
 if (DID_API.key == '🤫') alert('Please put your api key inside ./api.json and restart..');
 
-const RTCPeerConnection = (
-  window.RTCPeerConnection ||
-  window.webkitRTCPeerConnection ||
-  window.mozRTCPeerConnection
-).bind(window);
-
 let conversationId = null;
 
 let muted = false;
@@ -49,7 +43,6 @@ const talkVideoStream = document.getElementById('talk-video-stream');
 detectBrowser();
 
 const muteButton = document.getElementById('mute-button');
-const muteButtonMobile = document.getElementById('mute-button-mobile');
 const volumeHigh = document.getElementById('volume-high');
 const volumeOff = document.getElementById('volume-off');
 const volumeHighMobile = document.getElementById('volume-high-mobile');
@@ -57,6 +50,8 @@ const volumeOffMobile = document.getElementById('volume-off-mobile');
 
 const speed = document.getElementById('playback-speed');
 const speedMobile = document.getElementById('playback-speed-mobile');
+
+const poweredBy = document.getElementById('powered-by');
 
 let playbackSpeed = 1;
 const playbackSpeedValues = [1, 1.5, 2];
@@ -217,6 +212,7 @@ conversation.addEventListener('input', (event) => {
 
 const helpMessageInner = document.getElementById('help-message-inner');
 const loading = document.getElementById('loading');
+const loadingMobile = document.getElementById('loading-mobile');
 // chatButton.onclick = async () => {
 const submitHandler = () => {
   if (conversation.value === '') return;
@@ -226,7 +222,8 @@ const submitHandler = () => {
   //   micOnClicked = true;
   // }
 
-  loading.style.visibility = 'visible';
+  loading.classList.remove('d-none');
+  loadingMobile.classList.remove('d-none');
 
   recognitionState = !recognitionState;
   // TODO: Refactor
@@ -272,7 +269,7 @@ const submitHandler = () => {
   let raw;
   raw = conversation.value;
   // helpMessageInner.innerHTML += `<p class="align-self-end" style="text-align: left; color: black; width: 75%;">${raw}</p>`;
-  helpMessageInner.innerHTML += `
+  helpMessageInner.innerHTML +=  `
   <div class="d-flex align-self-end mb-3">
     <span class="d-flex">
       <span style="background-color: #fff; padding: 18px; border-radius: 10px;">${raw}</span>
@@ -339,28 +336,6 @@ async function getLocalStream() {
   await navigator.mediaDevices.getUserMedia({ video: false, audio: true });
 }
 
-const recognitionFactory = () => {
-  // const detectedBrowser = detectBrowser();
-
-  // switch (detectedBrowser) {
-  //   case 'Google Chrome':
-  //     return new webkitSpeechRecognition(); // Chrome
-  //   default:
-  //     return new SpeechRecognition(); // Firefox, Edge
-  // }
-
-  // window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-  // let recognition;
-  // if ('SpeechRecognition' in window) {
-  //   recognition = new SpeechRecognition();
-  // }
-  // else {
-  //   throw
-  // }
-
-  return recognition
-};
-
 function ask(raw) {
   console.log('Asking...');
   // return;
@@ -397,7 +372,8 @@ function ask(raw) {
       return readableString;
     })
     .then((result) => {
-      loading.style.visibility = 'hidden';
+      loading.classList.add('d-none');
+      loadingMobile.classList.add('d-none');
 
       say(result);
       aiResponseGlobal = result;

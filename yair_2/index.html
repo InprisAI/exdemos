@@ -197,10 +197,6 @@
         text-transform: uppercase;
       }
 
-      #help-message {
-        margin-top: 40px;
-      }
-
       #help-message-inner::-webkit-scrollbar {
         width: 10px;
         background-color: #CFCFCF;
@@ -221,10 +217,10 @@
       }
 
       #help-message-inner {
-        height: 165px;
-        background-image: url('../images/dots_05.png');
+        height: 190px;
+        background-image: url('../images/dots_05_20t.png');
         background-size: contain;
-        padding: 10px;
+        padding: 5%;
       }
 
       #chat-button, #talk-button {
@@ -253,6 +249,10 @@
         padding-bottom: .5rem;
       } */
 
+      #chat-form {
+        padding-left: 5%;
+      }
+
       .mute-button-background {
         background: #4D4D4D 0% 0% no-repeat padding-box;
         width: 40px;
@@ -267,6 +267,14 @@
       }
 
       @media screen and (min-width: 576px) {
+        #content {
+          padding-top: 100px;
+        }
+
+        #chat-form {
+          padding-left: 30px;
+        }
+
         #video-wrapper {
           /* background: url(bg.png); */
           height: 220px;
@@ -393,16 +401,6 @@
 
   <body class="bg-black">
     <div class="container">
-      <header class="my-1 my-md-4">
-        <div class="row text-white">
-          <div class="col offset-md-5">
-            <!-- <img src="../images/logo.svg" class="logo d-none d-sm-block" alt="logo" /> -->
-            <div class="d-sm-none">
-              <img src="../images/powered.svg" alt="powered by" class="m-2" />
-            </div>
-          </div>
-        </div>
-      </header>
       <div class="row" style="height: calc(100% - 100px);">
         <div class="d-flex justify-content-center align-items-sm-center w-100 h-100">
           <div
@@ -427,22 +425,23 @@
                     <video id="talk-video-stream" playsinline autoplay loop>
                       Your browser does not support the video tag.
                     </video>
-                    <div id="mute-button-mobile" class="d-sm-none" style="position: absolute; width: 100%; height: 100%; z-index: 3;">
-                      <div class="w-100 h-100" style="position: relative;">
-                        <div style="position: absolute; bottom: 0;">
-                          <span id="mute-button-mobile" class="ms-2 mute-button-background button" style="width: 40px; height: 40px; border-radius: 50px; padding: 5px; text-align: center;">
-                            <img id="volume-high-mobile" src="../images/volume_yair_2.svg"></img>
-                            <img id="volume-off-mobile" class="d-none" src="../images/mute_yair_2.svg"></img>
-                          </span>
-                          <span id="playback-speed-mobile" class="mute-button-background mx-3 px-3 button" style="border-radius: 50px; padding: 5px; text-align: center; color: white;">
+                    <div id="mute-button-mobile" class="d-flex d-sm-none" style="position: absolute; width: 100%; height: 100%; z-index: 3; padding: 5%;">
+                      <div class="mt-auto d-flex justify-content-between w-100 align-items-center">
+                        <div class="d-flex">
+                          <div class="mute-button-background button d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; border-radius: 50px; padding: 5px; text-align: center;">
+                            <img id="volume-high-mobile" src="../images/volume_yair_2.svg" style="height: 20px;"></img>
+                            <img id="volume-off-mobile" class="d-none" src="../images/mute_yair_2.svg" style="height: 20px;"></img>
+                          </div>
+                          <div id="playback-speed-mobile" class="mute-button-background mx-3 px-3 button d-flex align-items-center justify-content-center" style="border-radius: 50px; padding: 5px; text-align: center; color: white;">
                             1x
-                          </span>
-                          <div id="loading-mobile" class="loading d-none">Loading the answer...</div>
+                          </div>
+                          <div id="loading-mobile" class="loading d-none d-sm-none d-flex align-items-center">Loading...</div>
                         </div>
+                        <div id="powered-by" class="d-sm-none" style="font-size: 14px; color: white;">Powered by &nbsp;<span style="font-weight: bold;">Inpris</span></div>
                       </div>
                     </div>
                   </div>
-                  <div class="d-flex flex-column flex-grow-1" style="margin: 15px;">
+                  <div class="d-none d-sm-flex flex-column flex-grow-1" style="margin: 15px;">
                     <div class="d-none d-sm-flex mb-auto">
                       <div id="mute-button" class="mute-button-background button d-flex align-items-center justify-content-center" style="height: 40px; width: 40px; padding: 5px; border-radius: 50px;">
                         <img id="volume-high" src="../images/volume_yair_2.svg" style="height: 20px;"></img>
@@ -452,7 +451,7 @@
                         <div  id="playback-speed" class="d-flex align-items-center justify-content-center" style="font-size: 20px;">1x</div>
                       </div>
                     </div>
-                    <div id="loading" class="loading d-none d-sm-block mt-auto" style="visibility: hidden;">Loading the answer...</div>
+                    <div id="loading" class="loading d-none mt-auto">Loading the answer...</div>
                     <div class="row text-white">
                       <div class="col">
                         <div class="d-none d-sm-block">
@@ -467,16 +466,15 @@
                     id="help-message"
                     class="d-flex flex-column"
                   >
-                    <div id="help-message-inner" class="w-100 d-flex flex-column mb-0" style="overflow-y: scroll; background-color: #E1E1E1; border-right-radius: 5px;">
-                      <div class="d-flex chat-bot-background">
+                    <div id="help-message-inner" class="w-100 d-flex flex-column mb-0" style="flex-flow: column nowrap; overflow-y: auto; background-color: #E1E1E1;">
+                      <div class="d-flex chat-bot-background mb-1 mt-auto">
                         <div class="d-flex align-items-center">
                           <span style="background-color: #BCDDE6; padding: 18px; border-radius: 10px;">Send a message to chat</span>
                         </div>
                       </div>
-                      <!-- <p style="color: #14C6F1;">שלח לי הודעה כדי לדבר</p> -->
-                    </d>
+                    </div>
                   </div>
-                  <form id="chat-form" class="mx-2 mx-sm-0 my-2 d-flex flex-sm-nowrap" autocomplete="off" style="padding-left: 30px;">
+                  <form id="chat-form" class="mx-sm-0 my-2 d-flex flex-sm-nowrap" autocomplete="off">
                     <input id="speech" class="w-100 m-0 px-3" type="text" style="border: 0px; border-radius: 20px; height: 45px; flex: 1 1 auto;" autocomplete="off" />
                     <button
                       type="button"
