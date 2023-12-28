@@ -123,7 +123,7 @@ conversation.addEventListener('input', (event) => {
 });
 
 const helpMessageInner = document.getElementById('help-message-inner');
-// const helpMessageMenue = document.getElementById('help-message-menue');
+const helpMessageMenue = document.getElementById('help-message-menue');
 chatForm.onsubmit = async (e) => {
   e.preventDefault();
 
@@ -296,11 +296,11 @@ function ask(raw) {
       const decoder = new TextDecoder('utf-8');
       const readableString = decoder.decode(buffer);
 
-      // var answer = {};
-      // answer["answerPart"] = readableString.split('"manual" :')[0];
-      // answer["answerVal"] = answer["answerPart"].split('"answer" :')[1].slice(0, -2);
-      // answer["manuelPart"] = readableString.split('"manual" :')[1];
-      return readableString;
+      var answer = {};
+      answer["answerPart"] = readableString.split('"manual" :')[0];
+      answer["answerVal"] = answer["answerPart"].split('"answer" :')[1].slice(0, -2);
+      answer["manuelPart"] = readableString.split('"manual" :')[1];
+      return answer;
     })
     .then((result) => {
       // say(result);
@@ -310,35 +310,36 @@ function ask(raw) {
           <img src="./bot.png" alt="humain" />
         </div>
         <div class="d-flex align-items-center flex-grow-1">
-          <div style="color: white;">${result}</div>
+          <div style="color: white;">${result["answerVal"]}</div>
         </div>
+        <input id="hidden-element" type="text" class="d-none" value="${result["answerVal"]}" />
         <div class="p-3">
           <img class="click-to-copy" src="./duplicate.svg" alt="copy" />
         </div>
       </div>
 `;
-      // var menueStrings = splitString(result["manuelPart"]);
-      // for (let i = 0; i < menueStrings.length; i++) {
-      //   if (menueStrings[i].length > 15){ 
-      //     helpMessageMenue.innerHTML += `
-      //       <div class="d-flex mb-3 py-2">
-      //       <div class="px-4">
-      //         <img src="./bot.png" alt="humain" />
-      //       </div>
-      //       <div class="d-flex align-items-center flex-grow-1">
-      //         <div style="color: white;">${menueStrings[i]}</div>
-      //       </div>
-      //       <input id="hidden-element" type="text" class="d-none" value="${menueStrings[i]}" />
-      //       <div class="p-3">
-      //         <img class="click-to-copy" src="./duplicate.svg" alt="copy" />
-      //       </div>
-      //     </div>
-      //     `;
-      //   }
-      // }
+      var menueStrings = splitString(result["manuelPart"]);
+      for (let i = 0; i < menueStrings.length; i++) {
+        if (menueStrings[i].length > 15){ 
+          helpMessageMenue.innerHTML += `
+            <div class="d-flex mb-3 py-2">
+            <div class="px-4">
+              <img src="./bot.png" alt="humain" />
+            </div>
+            <div class="d-flex align-items-center flex-grow-1">
+              <div style="color: white;">${menueStrings[i]}</div>
+            </div>
+            <input id="hidden-element" type="text" class="d-none" value="${menueStrings[i]}" />
+            <div class="p-3">
+              <img class="click-to-copy" src="./duplicate.svg" alt="copy" />
+            </div>
+          </div>
+          `;
+        }
+      }
 
       helpMessageInner.scrollTo({top: 99999, behavior: 'smooth'});
-      // helpMessageMenue.scrollTo({top: 99999, behavior: 'smooth'});
+      helpMessageMenue.scrollTo({top: 99999, behavior: 'smooth'});
 
       // aiResponseGlobal = result;
       console.log(result);
