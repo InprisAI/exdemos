@@ -395,8 +395,8 @@ function setVideoElement(videoUrl) {
   talkVideoStream.classList.add('item-fade');
   
   // muteButton.classList.remove('d-none');
-
-  talkVideoStream.playbackRate = playbackSpeed;
+  // I guessed the number 10, try to resist changing
+  setTimeout(() => { talkVideoStream.playbackRate = playbackSpeed; }, 10);
   talkVideoStream.style.zIndex = 3;
   
   if (!videoUrl) return;
@@ -412,9 +412,9 @@ function setVideoElement(videoUrl) {
   }
 }
 
-talkVideoStream.onplay(() => {
-  setPlaybackRate(playbackSpeed);
-});
+// talkVideoStream.onloadstart((e) => {
+//   e.target.playbackRate = playbackSpeed;
+// });
 
 function playIdleVideo() {
   botSpeaking = false;
