@@ -388,11 +388,13 @@ function ask(raw) {
 function setVideoElement(videoUrl) {
   botSpeaking = true;
 
-  talkVideo.classList.remove('item-fade');
-  talkVideo.classList.add('item-fade-out');
-
-  talkVideoStream.classList.remove('item-fade-out');
-  talkVideoStream.classList.add('item-fade');
+  requestAnimationFrame(() => {
+    talkVideo.classList.remove('item-fade');
+    talkVideo.classList.add('item-fade-out');
+  
+    talkVideoStream.classList.remove('item-fade-out');
+    talkVideoStream.classList.add('item-fade');
+  });
   
   // muteButton.classList.remove('d-none');
   // I guessed the number 10, try to resist changing
