@@ -404,7 +404,7 @@ function setVideoElement(videoUrl) {
   // I guessed the number 10, try to resist changing
   setTimeout(() => { talkVideoStream.playbackRate = playbackSpeed; }, 10);
   
-  setTimeout(() => { if (!talkVideoStream.playing) playIdleVideo(); }, 500);
+  // setTimeout(() => { if (!talkVideoStream.playing) playIdleVideo(); }, 500);
   talkVideoStream.style.zIndex = 3;
   
   if (!videoUrl) return;
