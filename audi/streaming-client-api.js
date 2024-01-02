@@ -16,7 +16,7 @@ var notyf = new Notyf();
 const chatWindow = document.getElementById('help-message-inner');
 
 function applyQuestion() {
-  const text = 'Send a message or press the microphone to talk';
+  const text = 'Please type your question in the text box and click on the "send" button to submit it.';
 
   chatWindow.innerHTML = `
 <div class="d-flex mb-3">
