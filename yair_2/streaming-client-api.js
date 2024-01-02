@@ -385,6 +385,10 @@ function ask(raw) {
     .catch((error) => console.log('error: ', error));
 };
 
+talkVideoStream.onerror(() => {
+  playIdleVideo();
+});
+
 function setVideoElement(videoUrl) {
   botSpeaking = true;
 
