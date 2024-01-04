@@ -141,7 +141,7 @@
 
       #video-wrapper {
         /* background: url(bg.png); */
-        height: 400px;
+        height: 360px;
         background-position: top;
         position: relative;
       }
@@ -157,7 +157,7 @@
         /* border-radius: 5px; */
         background-color: #000;
         width: 100%;
-        height: 400px;
+        height: 360px;
       }
 
       #speech {
@@ -284,6 +284,7 @@
         video {
           /* border-top-left-radius: 5px; */
           width: 100%;
+          height: 220px;
         }
 
         .logo {
@@ -305,7 +306,6 @@
         }
 
         #help-message {
-          border-left: 2px solid #6D6D6D;
           margin-top: 0px;
         }
 
@@ -407,6 +407,12 @@
             class="col d-flex justify-content-center radial-gradient"
           >
             <div class="w-100">
+              <div class="row d-sm-none" style="border-bottom: thin solid #707070;">
+                <div class="col" style="padding-left: 5%; padding-right: 5%; padding-top: 8px; padding-bottom: 8px;">
+                  <h1 style="color: #0FBFEC; font-weight: normal;">Angel</h1>
+                  <div style="color: white;">Hi, I'm Angel and I'm a HumAIn by Inpris</div>
+                </div>
+              </div>
               <!-- <div class="humains-title mb-3 d-none d-sm-flex justify-content-between">
                 <div>&nbsp;</div>
                 <img src="../images/powered.svg" alt="powered by" class="mb-2" />
@@ -415,8 +421,12 @@
 
               <!-- adde "id=content" -->
               <div class="row background-panel">
-                <div class="row" style="border-top-right-radius: 10px; border-top-left-radius: 10px;">&nbsp;</div>
+                <!-- <div class="row d-none d-sm-flex" style="border-top-right-radius: 10px; border-top-left-radius: 10px;">
+                  <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4 col-xl-2 m-0 p-0">&nbsp;</div>
+                  <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8 col-xl-10 m-0 p-0" style="border-left: 2px solid #626262;">&nbsp;</div>
+                </div> -->
                 <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4 col-xl-2 m-0 p-0 d-flex flex-column">
+                  <div>&nbsp;</div>
                   <!-- added "id=video-wrapper" -->
                   <div id="video-wrapper" class="video-wrapper">
                     <video id="talk-video" playsinline autoplay muted loop>
@@ -425,7 +435,7 @@
                     <video id="talk-video-stream" playsinline autoplay loop>
                       Your browser does not support the video tag.
                     </video>
-                    <div id="mute-button-mobile" class="d-flex d-sm-none" style="position: absolute; width: 100%; height: calc(100% - 10px); z-index: 3; padding: 5%;">
+                    <div id="mute-button-mobile" class="d-flex" style="position: absolute; width: 100%; height: calc(100% - 10px); z-index: 3; padding: 5%;">
                       <div class="mt-auto d-flex justify-content-between w-100 align-items-center">
                         <div class="d-flex">
                           <div class="mute-button-background button d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; border-radius: 50px; padding: 5px; text-align: center;">
@@ -442,7 +452,7 @@
                     </div>
                   </div>
                   <div class="d-none d-sm-flex flex-column flex-grow-1" style="margin: 15px;">
-                    <div class="d-none d-sm-flex mb-auto">
+                    <div class="d-none">
                       <div id="mute-button" class="mute-button-background button d-flex align-items-center justify-content-center" style="height: 40px; width: 40px; padding: 5px; border-radius: 50px;">
                         <img id="volume-high" src="../images/volume_yair_2.svg" style="height: 20px;"></img>
                         <img id="volume-off" class="d-none" src="../images/mute_yair_2.svg" style="height: 20px;"></img>
@@ -451,8 +461,13 @@
                         <div  id="playback-speed" class="d-flex align-items-center justify-content-center" style="font-size: 20px;">1x</div>
                       </div>
                     </div>
-                    <div id="loading" class="loading d-none mt-auto">Loading the answer...</div>
-                    <div class="row text-white">
+                    <div class="row d-none d-sm-block">
+                      <div class="col" style="padding-left: 5%; padding-right: 5%; padding-top: 8px; padding-bottom: 8px;">
+                        <h1 style="color: #0FBFEC; font-weight: normal;">Angel</h1>
+                        <div style="color: white;">Hi, I'm Angel and I'm a HumAIn by Inpris</div>
+                      </div>
+                    </div>
+                    <div class="row text-white mt-auto">
                       <div class="col">
                         <div class="d-none d-sm-block">
                           <img src="../images/powered.svg" alt="powered by" />
@@ -461,7 +476,10 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8 col-xl-10 m-0 p-0">
+                <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8 col-xl-10 m-0 p-0" style="border-left: 2px solid #626262;">
+                  <div style="padding-left: 30px;">
+                    <span>&nbsp;</span><span id="loading" class="loading d-none" style="font-size: 12px;">Thinking...</span>
+                  </div>
                   <div
                     id="help-message"
                     class="d-flex flex-column"
