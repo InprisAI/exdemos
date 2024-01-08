@@ -1,0 +1,9 @@
+{
+    "voice": "he-IL-AvriNeural",
+    "voice_name": "Max",
+    "image": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_d538803d0174e03de7da5354b0a2e878.jpg",
+    "video": "young_man.mp4",
+    "humain": "amit:yoav",
+    "recognition_lang": "he-IL",
+    "idle_url": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_5cb0627638036efa7be22ed4acd8b476.mp4"
+}

@@ -16,7 +16,7 @@ var notyf = new Notyf();
 const chatWindow = document.getElementById('help-message-inner');
 
 function applyQuestion() {
-  const text = 'Send a message or press the microphone to talk';
+  const text = 'Please type your question in the text box and click on the "send" button to submit it.';
 
   chatWindow.innerHTML = `
 <div class="d-flex mb-3">
@@ -106,7 +106,7 @@ const chatForm = document.getElementById('chat-form');
 const conversation = document.getElementById('speech');
 // const microphoneIcon = document.getElementsByClassName('fa-microphone')[0];
 // const sendIcon = document.getElementsByClassName('paper-plane')[0];
-let clientId = CUSTOM.copilot;
+let clientId = CUSTOM.humain;
 
 conversation.addEventListener('input', (event) => {
   if (event.target.value.length > 0) {
@@ -164,7 +164,7 @@ chatForm.onsubmit = async (e) => {
   helpMessageInner.innerHTML += `
   <div class="d-flex mb-3 py-2" style="background-color: rgba(255, 255, 255, .2);">
     <div class="p-4">
-      <img src="./hyundai.png" alt="hyundai" />
+      <img src="./audi.png" alt="audi" />
     </div>
     <div class="d-flex align-items-center flex-grow-1">
       <div style="color: white;">${raw}</div>
@@ -320,20 +320,22 @@ function ask(raw) {
 `;
       var menueStrings = splitString(result["manuelPart"]);
       for (let i = 0; i < menueStrings.length; i++) {
-        helpMessageMenue.innerHTML += `
-          <div class="d-flex mb-3 py-2">
-          <div class="px-4">
-            <img src="./bot.png" alt="humain" />
+        if (menueStrings[i].length > 15){ 
+          helpMessageMenue.innerHTML += `
+            <div class="d-flex mb-3 py-2">
+            <div class="px-4">
+              <img src="./bot.png" alt="humain" />
+            </div>
+            <div class="d-flex align-items-center flex-grow-1">
+              <div style="color: white;">${menueStrings[i]}</div>
+            </div>
+            <input id="hidden-element" type="text" class="d-none" value="${menueStrings[i]}" />
+            <div class="p-3">
+              <img class="click-to-copy" src="./duplicate.svg" alt="copy" />
+            </div>
           </div>
-          <div class="d-flex align-items-center flex-grow-1">
-            <div style="color: white;">${menueStrings[i]}</div>
-          </div>
-          <input id="hidden-element" type="text" class="d-none" value="${menueStrings[i]}" />
-          <div class="p-3">
-            <img class="click-to-copy" src="./duplicate.svg" alt="copy" />
-          </div>
-        </div>
-        `;
+          `;
+        }
       }
 
       helpMessageInner.scrollTo({top: 99999, behavior: 'smooth'});
