@@ -255,9 +255,9 @@ const submitHandler = () => {
     talkButton.classList.remove('d-none');
   }
 
-  if (recognized) {
-    if (recognition) recognition.stop();
-  }
+  // if (recognized) {
+  //   if (recognition) recognition.stop();
+  // }
 
   let raw;
   raw = conversation.value;
@@ -318,7 +318,7 @@ recognition.onspeechend = function () {
 
 recognition.onnomatch = function(event) {
   console.log("I didn't recognise that color.");
-  recognition.stop();
+  // recognition.stop();
 
   microphoneIcon.classList.remove('d-none');
   ellipsis.classList.add('d-none');
