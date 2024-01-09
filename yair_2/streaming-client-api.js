@@ -307,9 +307,6 @@ recognition.onresult = function (event) {
   microphoneIcon.classList.remove('d-none');
   ellipsis.classList.add('d-none');
 
-  // if (conversation.value !== '') recognition.stop();
-  // resolve(transcript);
-
   submitHandler();
 };
 
