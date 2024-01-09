@@ -307,7 +307,7 @@ recognition.onresult = function (event) {
 
   conversation.value = transcript;
 
-  console.log('Recognized speech:', transcript);
+  alert('Recognized speech:', transcript);
 
   microphoneIcon.classList.remove('d-none');
   ellipsis.classList.add('d-none');
@@ -325,7 +325,7 @@ recognition.onspeechend = function () {
 };
 
 recognition.onnomatch = function(event) {
-  console.log("I didn't recognise that color.");
+  alert("I didn't recognise that color.");
 }
 
 recognition.onerror = function(event) {
