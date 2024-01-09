@@ -183,8 +183,6 @@ const ellipsis = document.getElementById('ellipsis');
 
 talkButton.addEventListener('click', async () => {
   recognize();
-  recognized = true;
-  recognitionState = false;
 });
 
 conversation.addEventListener('input', (event) => {
@@ -299,6 +297,8 @@ function recognize() {
 recognition.onresult = function (event) {
   const transcript = event.results[0][0].transcript;
   // const transcript = event.results[event.results.length - 1][0].transcript;
+  recognized = true;
+  recognitionState = false;
 
   conversation.value = transcript;
 
