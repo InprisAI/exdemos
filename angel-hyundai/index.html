@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Angel by Inpris</title>
+    <!-- added google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="../css/all.min.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="../favicon.png" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script src="./streaming-client-api.js"></script>
+    <style>
+      * {
+        /* direction: rtl; */
+      }
+
+      .peerConnectionState-new {
+        color: cornflowerblue;
+      }
+      .peerConnectionState-connecting {
+        color: orange;
+      }
+      .peerConnectionState-connected {
+        color: green;
+      }
+      .peerConnectionState-disconnected,
+      .peerConnectionState-closed,
+      .peerConnectionState-failed {
+        color: red;
+      }
+
+      .iceConnectionState-new {
+        color: cornflowerblue;
+      }
+      .iceConnectionState-checking {
+        color: orange;
+      }
+      .iceConnectionState-connected,
+      .iceConnectionState-completed {
+        color: green;
+      }
+      .peerConnectionState-disconnected,
+      .peerConnectionState-closed,
+      .peerConnectionState-failed {
+        color: red;
+      }
+
+      .iceGatheringState-new {
+        color: cornflowerblue;
+      }
+      .iceGatheringState-gathering {
+        color: orange;
+      }
+      .iceGatheringState-complete {
+        color: black;
+      }
+
+      .signalingState-stable {
+        color: green;
+      }
+      .signalingState-have-local-offer,
+      .signalingState-have-remote-offer,
+      .signalingState-have-local-pranswer,
+      .signalingState-have-remote-pranswer {
+        color: cornflowerblue;
+      }
+      .signalingState-closed {
+        color: red;
+      }
+
+      .streamingState-streaming {
+        color: green;
+      }
+
+      .streamingState-empty {
+        color: grey;
+      }
+
+      /* added csss from here */
+
+      body * {
+        font-family: 'Roboto', sans-serif;
+        /* text-align: center; */
+        outline: none;
+      }
+
+      #content {
+        /* width: 820px;
+        position: relative;
+        margin: 0 auto; */
+      }
+
+      #buttons {
+        clear: both;
+        padding: 0 0 0 0;
+        text-align: center;
+      }
+
+      button {
+        padding: 10px 30px;
+        border-radius: 5px;
+        border: none;
+        font-size: 17px;
+        margin: 0 5px;
+        background-color: #14C6F1;
+        color: #fff;
+      }
+
+      button:hover {
+        background-color: #14C6F1;
+        cursor: pointer;
+        transition: all 0.2s ease-out;
+      }
+
+      #status {
+        clear: both;
+        padding: 20px 0 0 0;
+        text-align: left;
+        display: inline-block;
+        zoom: 1;
+        line-height: 140%;
+        font-size: 15px;
+      }
+
+      #status div {
+        padding-bottom: 10px;
+      }
+
+      #video-wrapper {
+        /* background: url(bg.png); */
+        height: 360px;
+        background-position: top;
+        position: relative;
+      }
+
+      #video-wrapper div#help-message {
+        width: 400px;
+        margin: 0 auto;
+        padding: 50px 0 0 0;
+      }
+
+      video {
+        display: block;
+        /* border-radius: 5px; */
+        background-color: #000;
+        width: 100%;
+        height: 360px;
+      }
+
+      #speech {
+        /* min-width: 80%; */
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
+      }
+
+      .item-fade {
+        position: absolute;
+        display: block;
+        z-index: 2;
+        opacity: 1;
+        transition: opacity .5s ease-in-out 0s;
+      }
+
+      .item-fade-out {
+        position: absolute;
+        display: block;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity .5s ease-in-out 0s;
+      }
+
+      .radial-gradient {
+        display: none;
+        /* background: transparent radial-gradient(closest-side at 50% 50%, #204885 0%, #20488500 100%) 0% 0% no-repeat padding-box; */
+      }
+
+      .humains-title {
+        text-align: left;
+        font: normal normal bold 40px/33px Jura;
+        letter-spacing: 0px;
+        color: #FFFFFF;
+        text-transform: uppercase;
+      }
+
+      #help-message-inner::-webkit-scrollbar {
+        width: 10px;
+        background-color: #CFCFCF;
+      }
+
+      #help-message-inner::-webkit-scrollbar-thumb {
+        background-color: #14C6F1;
+        border-radius: 3px;
+      }
+
+      #help-message-inner::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+        background-color: #CFCFCF;
+      }
+
+      .logo {
+        width: 48px;
+      }
+
+      #help-message-inner {
+        height: 160px;
+        background-image: url('../images/dots_05_20t.png');
+        background-size: contain;
+        padding: 5%;
+      }
+
+      #chat-button, #talk-button {
+        color: white;
+        width: 20%;
+      }
+
+      .chat-bot-background {
+        /* background-color: rgba(225, 225, 225, 1); */
+      }
+
+      /* .loading {
+        background: #B5B5B5 0% 0% no-repeat padding-box;
+        border-radius: 0px 0px 10px 0px;
+        opacity: 0.2;
+      } */
+
+      .loading {
+        color: #B3B3B3;
+      }
+
+      /* #chat-form {
+        background: #2A2A2A 0% 0% no-repeat padding-box;
+        border-radius: 0px 0px 0px 10px;
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+      } */
+
+      #chat-form {
+        padding-left: 5%;
+      }
+
+      .mute-button-background {
+        background: #4D4D4D 0% 0% no-repeat padding-box;
+        width: 40px;
+      }
+
+      .mute-button-background:hover {
+        background: #707070  0% 0% no-repeat padding-box;
+      }
+
+      .button {
+        height: 40px;
+      }
+
+      .border-on-left {
+        border-left: none;
+      }
+
+      @media screen and (min-width: 576px) {
+        .border-on-left {
+          border-left: 2px solid #626262;
+        }
+
+        #content {
+          padding-top: 100px;
+        }
+
+        #chat-form {
+          padding-left: 30px;
+        }
+
+        #video-wrapper {
+          /* background: url(bg.png); */
+          height: 220px;
+          background-position: top;
+        }
+
+        video {
+          /* border-top-left-radius: 5px; */
+          width: 100%;
+          height: 220px;
+        }
+
+        .logo {
+          width: 70px;
+        }
+
+        #help-message-inner {
+          height: 521px;
+          background-image: unset;
+          padding: 30px;
+        }
+
+        .radial-gradient {
+          background: transparent radial-gradient(closest-side at 50% 50%, #204885 0%, #20488500 100%) 0% 0% no-repeat padding-box;
+        }
+
+        #chat-button, #talk-button {
+          width: 10%;
+        }
+
+        #help-message {
+          margin-top: 0px;
+        }
+
+        .background-panel {
+          background: #2A2A2A 0% 0% no-repeat padding-box;
+          border-radius: 10px;
+        }
+      }
+
+
+
+      .custom-select {
+        position: relative;
+        font-family: Arial;
+      }
+
+      .custom-select select {
+        display: none; /*hide original SELECT element: */
+      }
+
+      .select-selected {
+        /* background-color: white; */
+        color: white;
+        border: 0.5px solid #C4C4C4;
+        border-radius: 5px;
+      }
+
+      /* Style the arrow inside the select element: */
+      /* .select-selected:after {
+        position: absolute;
+        content: "";
+        top: 14px;
+        right: 10px;
+        width: 0;
+        height: 0;
+        border: 6px solid transparent;
+        border-color: black transparent transparent transparent;
+        /* background-image: url('./icons-down.svg'); /
+      }
+
+      /* Point the arrow upwards when the select box is open (active): /
+      .select-selected.select-arrow-active:after {
+        border-color: transparent transparent black transparent;
+        top: 7px;
+        /* background-image: url('./icons-down.svg'); /
+      } */
+
+      /* style the items (options), including the selected item: */
+      .select-items div {
+        color: white;
+        padding: 8px 22px;
+        background-color: #707070;
+        border: 1px solid transparent;
+        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+        cursor: pointer;
+      }
+
+      .select-selected {
+        color: white;
+        padding: 8px 22px;
+        border: 1px solid transparent;
+        border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+        cursor: pointer;
+      }
+
+      /* Style items (options): */
+      .select-items {
+        position: absolute;
+        background-color: white;
+        top: 50px;
+        left: 0;
+        right: 0;
+        z-index: 99;
+        border-radius: 5px;
+      }
+
+      /* Hide the items when the select box is closed: */
+      .select-hide {
+        display: none;
+      }
+
+      .select-items div:hover {
+        background-color: #707070;
+        /* border-radius: 5px; */
+      }
+
+      .same-as-selected {
+        background-color: #EFFCFF;
+        /* border-radius: 5px; */
+      }
+    </style>
+  </head>
+
+  <body class="bg-black">
+    <div class="container">
+      <div class="row" style="height: calc(100% - 100px);">
+        <div class="d-flex justify-content-center align-items-sm-center w-100 h-100">
+          <div
+            class="col d-flex justify-content-center radial-gradient"
+          >
+            <div class="w-100">
+              <div class="row d-sm-none" style="border-bottom: thin solid #707070;">
+                <div class="col" style="padding-left: 5%; padding-right: 5%; padding-top: 8px; padding-bottom: 8px;">
+                  <h1 style="color: #0FBFEC; font-weight: normal;">Angel</h1>
+                  <div style="color: white;">Hi, I'm Angel and I'm a HumAIn by Inpris</div>
+                </div>
+              </div>
+              <!-- <div class="humains-title mb-3 d-none d-sm-flex justify-content-between">
+                <div>&nbsp;</div>
+                <img src="../images/powered.svg" alt="powered by" class="mb-2" />
+              </div> -->
+              <div id="content">
+
+              <!-- adde "id=content" -->
+              <div class="row background-panel">
+                <!-- <div class="row d-none d-sm-flex" style="border-top-right-radius: 10px; border-top-left-radius: 10px;">
+                  <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4 col-xl-2 m-0 p-0">&nbsp;</div>
+                  <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8 col-xl-10 m-0 p-0" style="border-left: 2px solid #626262;">&nbsp;</div>
+                </div> -->
+                <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4 col-xl-2 m-0 p-0 d-flex flex-column">
+                  <div class="d-none d-sm-block">&nbsp;</div>
+                  <!-- added "id=video-wrapper" -->
+                  <div id="video-wrapper" class="video-wrapper">
+                    <video id="talk-video" playsinline autoplay muted loop>
+                      Your browser does not support the video tag.
+                    </video>
+                    <video id="talk-video-stream" playsinline autoplay loop>
+                      Your browser does not support the video tag.
+                    </video>
+                    <div id="mute-button-mobile" class="d-flex" style="position: absolute; width: 100%; height: calc(100% - 10px); z-index: 3; padding: 5%;">
+                      <div class="mt-auto d-flex justify-content-between w-100 align-items-center">
+                        <div class="d-flex">
+                          <div class="mute-button-background button d-flex align-items-center justify-content-center" style="width: 40px; height: 40px; border-radius: 50px; padding: 5px; text-align: center;">
+                            <img id="volume-high-mobile" src="../images/volume_yair_2.svg" style="height: 20px;"></img>
+                            <img id="volume-off-mobile" class="d-none" src="../images/mute_yair_2.svg" style="height: 20px;"></img>
+                          </div>
+                          <div id="playback-speed-mobile" class="mute-button-background mx-3 px-3 button d-flex align-items-center justify-content-center" style="border-radius: 50px; padding: 5px; text-align: center; color: white;">
+                            1x
+                          </div>
+                          <div id="loading-mobile" class="loading d-none d-sm-none d-flex align-items-center">Thinking ...</div>
+                        </div>
+                        <div id="powered-by" class="d-sm-none" style="font-size: 14px; color: white;">Powered by &nbsp;<span style="font-weight: bold;">Inpris</span></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-none d-sm-flex flex-column flex-grow-1" style="margin: 15px;">
+                    <div class="d-none">
+                      <div id="mute-button" class="mute-button-background button d-flex align-items-center justify-content-center" style="height: 40px; width: 40px; padding: 5px; border-radius: 50px;">
+                        <img id="volume-high" src="../images/volume_yair_2.svg" style="height: 20px;"></img>
+                        <img id="volume-off" class="d-none" src="../images/mute_yair_2.svg" style="height: 20px;"></img>
+                      </div>
+                      <div class="mute-button-background mx-3 px-3 button" style="border-radius: 50px; padding: 5px; text-align: center; color: white;">
+                        <div  id="playback-speed" class="d-flex align-items-center justify-content-center" style="font-size: 20px;">1x</div>
+                      </div>
+                    </div>
+                    <div class="row d-none d-sm-block">
+                      <div class="col" style="padding-left: 5%; padding-right: 5%; padding-top: 8px; padding-bottom: 8px;">
+                        <h1 style="color: #0FBFEC; font-weight: normal;">Angel</h1>
+                        <div style="color: white;">Hi, I'm Angel and I'm a HumAIn by Inpris</div>
+                      </div>
+                    </div>
+                    <div class="row text-white mt-auto">
+                      <div class="col">
+                        <div class="d-none d-sm-block">
+                          <img src="../images/powered.svg" alt="powered by" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8 col-xl-10 m-0 p-0 border-on-left">
+                  <div class="d-none d-sm-block" style="padding-left: 30px;">
+                    <span>&nbsp;</span><span id="loading" class="loading d-none" style="font-size: 12px;">Thinking...</span>
+                  </div>
+                  <div
+                    id="help-message"
+                    class="d-flex flex-column"
+                  >
+                    <div id="help-message-inner" class="w-100 d-flex flex-column mb-0" style="flex-flow: column nowrap; overflow-y: auto; background-color: #E1E1E1;">
+                      <div class="d-flex chat-bot-background mb-1 mt-auto">
+                        <div class="d-flex align-items-center">
+                          <span style="background-color: #BCDDE6; padding: 18px; border-radius: 10px;">Send a message to chat</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <form id="chat-form" class="mx-sm-0 my-2 d-flex flex-sm-nowrap" autocomplete="off">
+                    <input id="speech" class="w-100 m-0 px-3" type="text" style="border: 0px; border-radius: 20px; height: 45px; flex: 1 1 auto;" autocomplete="off" />
+                    <button
+                      type="button"
+                      id="talk-button"
+                      class="m-0 me-sm-0 p-0 my-sm-0 flex-shrink-1"
+                      type="button"
+                      style="border-radius: 20px; height: 45px; background-color: transparent;">
+                      <img id="microphone-icon" src="../images/mic_yair_2.svg" />
+                      <img id="ellipsis" class="d-none" src="../images/3dots_01.gif" />
+                    </button>
+                    <button
+                      type="submit"
+                      id="chat-button"
+                      class="d-none m-0 me-sm-0 p-0 my-sm-0"
+                      type="button"
+                      style="border-radius: 20px; height: 45px; background-color: transparent;">
+                      <span id="send-icon">
+                        <img src="../images/send.svg" />
+                      </span>
+                    </button>
+                  </form>
+                </div>
+              </div>
+                <!-- added div#buttons -->
+                <!-- <div id="buttons">
+                  <button id="connect-button" type="button">Connect</button>
+                  <button id="talk-button" type="button">Start</button>
+                  <button id="destroy-button" type="button">Destroy</button>
+                </div>
+
+                < added div#status >
+                <div id="status">
+                  < removed the wrapping <div> tags >
+                  ICE gathering status: <label id="ice-gathering-status-label"></label
+                  ><br />
+                  ICE status: <label id="ice-status-label"></label><br />
+                  Peer connection status: <label id="peer-status-label"></label><br />
+                  Signaling status: <label id="signaling-status-label"></label><br />
+                  Streaming status: <label id="streaming-status-label"></label><br />
+                </div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="./index.js"></script>
+  </body>
+</html>
