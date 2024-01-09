@@ -325,11 +325,11 @@ recognition.onspeechend = function () {
 };
 
 recognition.onnomatch = function(event) {
-  diagnostic.textContent = "I didn't recognise that color.";
+  console.log("I didn't recognise that color.");
 }
 
 recognition.onerror = function(event) {
-  diagnostic.textContent = 'Error occurred in recognition: ' + event.error;
+  console.log('Error occurred in recognition: ' + event.error);
 }
 
 async function getLocalStream() {
