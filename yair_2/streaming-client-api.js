@@ -326,6 +326,10 @@ recognition.onspeechend = function () {
 
 recognition.onnomatch = function(event) {
   alert("I didn't recognise that color.");
+  recognition.stop();
+
+  microphoneIcon.classList.remove('d-none');
+  ellipsis.classList.add('d-none');
 }
 
 recognition.onerror = function(event) {
