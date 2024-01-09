@@ -183,13 +183,8 @@ const ellipsis = document.getElementById('ellipsis');
 
 talkButton.addEventListener('click', async () => {
   recognize();
-  // if (recognition) recognition.start();
   recognized = true;
   recognitionState = false;
-
-  // chatButton.classList.remove('d-none');
-  // talkButton.classList.add('d-none');
-  // submitHandler();
 });
 
 conversation.addEventListener('input', (event) => {
@@ -293,7 +288,7 @@ chatForm.onsubmit = async (e) => {
   submitHandler();
 };
 
-async function recognize() {
+function recognize() {
   microphoneIcon.classList.add('d-none');
   ellipsis.classList.remove('d-none');
   recognitionState = true;
