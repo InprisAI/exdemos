@@ -181,7 +181,7 @@ const microphoneIcon = document.getElementById('microphone-icon');
 // const sendIcon = document.getElementById('send-icon');
 const ellipsis = document.getElementById('ellipsis');
 
-talkButton.addEventListener('click', async () => {
+talkButton.addEventListener('click', (e) => {
   recognize();
 });
 
@@ -292,15 +292,15 @@ function recognize() {
   recognitionState = true;
 
   recognition.start();
-  
-  alert('started');
+
+  console.log('started');
 }
 
 recognition.onresult = function (event) {
   const transcript = event.results[0][0].transcript;
   // const transcript = event.results[event.results.length - 1][0].transcript;
   
-  alert(transcript);
+  // alert(transcript);
 
   recognized = true;
   recognitionState = false;
@@ -386,9 +386,9 @@ function ask(raw) {
     .catch((error) => console.log('error: ', error));
 };
 
-talkVideoStream.onerror(() => {
-  playIdleVideo();
-});
+// talkVideoStream.onerror(() => {
+//   playIdleVideo();
+// });
 
 function setVideoElement(videoUrl) {
   botSpeaking = true;
