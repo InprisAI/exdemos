@@ -5,11 +5,7 @@
 let DID_API;
 let CUSTOM
 
-// alert('out');
-
 const loadJSON = async () => {
-  // alert('in');
-
   const respo = await fetch("../api.json");
   DID_API = await respo.json();
 
@@ -324,7 +320,7 @@ const loadJSON = async () => {
   };
 
   recognition.onnomatch = function(event) {
-    alert("I didn't recognise that color.");
+    alert("I didn't recognise anything.");
     // recognition.stop();
 
     microphoneIcon.classList.remove('d-none');
