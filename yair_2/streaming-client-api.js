@@ -328,7 +328,7 @@ const loadJSON = async () => {
   };
 
   recognition.onnomatch = function(event) {
-    console.log("I didn't recognise that color.");
+    alert("I didn't recognise that color.");
     // recognition.stop();
 
     microphoneIcon.classList.remove('d-none');
