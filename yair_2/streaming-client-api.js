@@ -292,6 +292,8 @@ function recognize() {
   recognitionState = true;
 
   recognition.start();
+  
+  alert('started');
 }
 
 recognition.onresult = function (event) {
