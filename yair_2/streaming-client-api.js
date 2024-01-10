@@ -296,13 +296,9 @@ const loadJSON = async () => {
     recognitionState = true;
 
     recognition.start();
-
-    alert('started');
   }
 
   recognition.onresult = function (event) {
-    alert();
-
     const transcript = event.results[0][0].transcript;
     // const transcript = event.results[event.results.length - 1][0].transcript;
     
