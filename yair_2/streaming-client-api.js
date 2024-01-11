@@ -215,6 +215,8 @@ const loadJSON = async () => {
     //   micOnClicked = true;
     // }
 
+    loading.innerHTML = 'Loading...';
+    loadingMobile.innerHTML = 'Loading...';
     loading.classList.remove('d-none');
     loadingMobile.classList.remove('d-none');
 
@@ -298,8 +300,6 @@ const loadJSON = async () => {
     const transcript = event.results[0][0].transcript;
     // const transcript = event.results[event.results.length - 1][0].transcript;
     
-    // alert(transcript);
-
     recognized = true;
     recognitionState = false;
 
@@ -320,7 +320,11 @@ const loadJSON = async () => {
   };
 
   recognition.onnomatch = function(event) {
-    alert("I didn't recognise anything.");
+    loading.classList.remove('d-none');
+    loadingMobile.classList.remove('d-none');
+
+    loading.innerHTML = "I didn't recognise anything.";
+    loadingMobile.innerHTML = "I didn't recognise anything.";
     // recognition.stop();
 
     microphoneIcon.classList.remove('d-none');
