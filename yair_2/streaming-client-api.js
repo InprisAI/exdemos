@@ -28,8 +28,8 @@ const loadJSON = async () => {
   var recognition = new SpeechRecognition();
 
   recognition.lang = CUSTOM.recognition_lang; // Set language (e.g., US English)
-  recognition.continuous = true; // Enable continuous recognition
-  recognition.interimResults = true; // Get interim results as the user speaks
+  recognition.continuous = false; // Enable continuous recognition
+  recognition.interimResults = false; // Get interim results as the user speaks
 
   let recognitionState = false;
 
