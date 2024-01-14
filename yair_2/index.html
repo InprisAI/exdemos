@@ -453,6 +453,7 @@
                           <div id="playback-speed-mobile" class="mute-button-background mx-3 px-3 button d-flex align-items-center justify-content-center" style="border-radius: 50px; padding: 5px; text-align: center; color: white;">
                             1x
                           </div>
+                          <div id="loading-speech-mobile" class="loading d-none d-sm-none d-flex align-items-center">Loading speech recognition ...</div>
                           <div id="loading-mobile" class="loading d-none d-sm-none d-flex align-items-center">Thinking ...</div>
                         </div>
                         <div id="powered-by" class="d-sm-none" style="font-size: 14px; color: white;">Powered by &nbsp;<span style="font-weight: bold;">Inpris</span></div>
@@ -486,7 +487,9 @@
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8 col-xl-10 m-0 p-0 border-on-left">
                   <div class="d-none d-sm-block" style="padding-left: 30px;">
-                    <span>&nbsp;</span><span id="loading" class="loading d-none" style="font-size: 12px;">Thinking...</span>
+                    <span>&nbsp;</span>
+                    <span id="loading" class="loading d-none" style="font-size: 12px;">Thinking...</span>
+                    <span id="loading-speech" class="loading" style="font-size: 12px;">Loading speech...</span>
                   </div>
                   <div
                     id="help-message"
@@ -505,7 +508,7 @@
                     <button
                       type="button"
                       id="talk-button"
-                      class="m-0 me-sm-0 p-0 my-sm-0 flex-shrink-1"
+                      class="d-none m-0 me-sm-0 p-0 my-sm-0 flex-shrink-1"
                       style="border-radius: 20px; height: 45px; background-color: transparent;">
                       <img id="microphone-icon" src="../images/mic_yair_2.svg" />
                       <img id="ellipsis" class="d-none" src="../images/3dots_01.gif" />
@@ -513,7 +516,7 @@
                     <button
                       type="submit"
                       id="chat-button"
-                      class="d-none m-0 me-sm-0 p-0 my-sm-0"
+                      class="m-0 me-sm-0 p-0 my-sm-0"
                       style="border-radius: 20px; height: 45px; background-color: transparent;">
                       <span id="send-icon">
                         <img src="../images/send.svg" />
@@ -521,24 +524,6 @@
                     </button>
                   </form>
                 </div>
-              </div>
-                <!-- added div#buttons -->
-                <!-- <div id="buttons">
-                  <button id="connect-button" type="button">Connect</button>
-                  <button id="talk-button" type="button">Start</button>
-                  <button id="destroy-button" type="button">Destroy</button>
-                </div>
-
-                < added div#status >
-                <div id="status">
-                  < removed the wrapping <div> tags >
-                  ICE gathering status: <label id="ice-gathering-status-label"></label
-                  ><br />
-                  ICE status: <label id="ice-status-label"></label><br />
-                  Peer connection status: <label id="peer-status-label"></label><br />
-                  Signaling status: <label id="signaling-status-label"></label><br />
-                  Streaming status: <label id="streaming-status-label"></label><br />
-                </div> -->
               </div>
             </div>
           </div>

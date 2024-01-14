@@ -205,7 +205,18 @@ const loadJSON = async () => {
 
   const helpMessageInner = document.getElementById('help-message-inner');
   const loading = document.getElementById('loading');
+  const loadingSpeech = document.getElementById('loading-speech');
   const loadingMobile = document.getElementById('loading-mobile');
+  const loadingSpeechMobile = document.getElementById('loading-speech-mobile');
+
+  setTimeout(_ => {
+    loadingSpeech.classList.add('d-none');
+    loadingSpeechMobile.classList.add('d-none');
+
+    talkButton.classList.remove('d-none');
+    chatButton.classList.add('d-none');
+  }, 25000);
+
   // chatButton.onclick = async () => {
   const submitHandler = () => {
     if (conversation.value === '') return;
