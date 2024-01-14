@@ -1,0 +1,57 @@
+.ltr * {
+    direction: ltr;
+}
+
+.ltr .offset-buttons {
+    padding-left: 30px;
+}
+
+.rtl * {
+    direction: rtl;
+}
+
+.rtl .offset-buttons {
+    padding-right: 30px;
+}
+
+.ltr #chat-form {
+    padding-left: 5%;
+}
+
+.rtl #chat-form {
+    padding-right: 5%;
+}
+
+.ltr .border-on-left {
+    border-left: none;
+}
+
+.rtl .border-on-left {
+    border-right: none;
+}
+
+@media screen and (min-width: 576px) {
+    .ltr .margin-sm-0 {
+        margin-left: 10px !important;
+    }
+
+    .rtl .margin-sm-0 {
+        margin-right: 10px !important;
+    }
+
+    .ltr .border-on-left {
+        border-left: 2px solid #626262;
+    }
+    
+    .rtl .border-on-left {
+        border-right: 2px solid #626262;
+    }
+
+    .ltr #chat-form {
+        padding-left: 30px;
+    }
+
+    .rtl #chat-form {
+        padding-right: 30px;
+    }
+}
