@@ -42,6 +42,8 @@ const loadJSON = async () => {
   let conversationId = null;
 
   let muted = false;
+  let botSpeaking = false;
+  let recognized;
 
   getLocalStream();
 
@@ -90,6 +92,10 @@ const loadJSON = async () => {
     speed.innerHTML = playbackSpeedValues[playbackSpeedClicked % 3] + 'x';
     speedMobile.innerHTML = playbackSpeedValues[playbackSpeedClicked % 3] + 'x';
   };
+
+  const setPlaybackRate = (playbackRate) => {
+    talkVideoStream.playbackRate = playbackRate;
+  }
 
   speed.addEventListener('click', () => {
     speedClick();
