@@ -21,6 +21,8 @@ const loadJSON = async () => {
   const body = document.getElementsByTagName('body')[0];
   const textAngel = document.getElementById('text-angel');
   const textDescription = document.getElementById('text-description');
+  const textAngelMobile = document.getElementById('text-angel-mobile');
+  const textDescriptionMobile = document.getElementById('text-description-mobile');
   const sendMessage = document.getElementById('send-message');
   const sendImageIcon = document.getElementById('send-image-icon');
 
@@ -30,6 +32,8 @@ const loadJSON = async () => {
 
   textAngel.innerHTML = CUSTOM.textAngel;
   textDescription.innerHTML = CUSTOM.textDescription;
+  textAngelMobile.innerHTML = CUSTOM.textAngel;
+  textDescriptionMobile.innerHTML = CUSTOM.textDescription;
   sendMessage.innerHTML = CUSTOM.sendMessage;
   sendImageIcon.src = CUSTOM.sendImageIcon;
   
@@ -38,8 +42,6 @@ const loadJSON = async () => {
   let conversationId = null;
 
   let muted = false;
-  let botSpeaking = false;
-  let recognized;
 
   getLocalStream();
 
@@ -88,10 +90,6 @@ const loadJSON = async () => {
     speed.innerHTML = playbackSpeedValues[playbackSpeedClicked % 3] + 'x';
     speedMobile.innerHTML = playbackSpeedValues[playbackSpeedClicked % 3] + 'x';
   };
-
-  const setPlaybackRate = (playbackRate) => {
-    talkVideoStream.playbackRate = playbackRate;
-  }
 
   speed.addEventListener('click', () => {
     speedClick();
@@ -385,6 +383,8 @@ const loadJSON = async () => {
       'Content-Type': 'text/plain',
     };
 
+    if (!conversationId) conversationId = urlParams.get('conversationId') || getToken();
+
     if (conversationId) myHeaders['Conversation-Id'] = conversationId;
 
     var requestOptions = {
@@ -400,10 +400,7 @@ const loadJSON = async () => {
           throw new Error('Network response was not OK');
         }
 
-        if (!conversationId) {
-          conversationId = response.headers.get('Conversation-Id');
-          if (!conversationId) conversationId = getToken();
-        }
+        conversationId = response.headers.get('Conversation-Id');
 
         const buffer = await response.arrayBuffer();
         const decoder = new TextDecoder('utf-8');
