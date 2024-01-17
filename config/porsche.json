@@ -2,6 +2,7 @@
     "title": "Angel for Porsche", 
     "voice": "en-US-JennyNeural",
     "image": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_58b1704bff34eebf5536c87cbfc00b52.jpg",
+    "video": "idle.mp4",
     "humain": "demo:k1ara_porsche",
     "recognition_lang": "en-US",
     "idle_url": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_58b1704bff34eebf5536c87cbfc00b52.mp4",
