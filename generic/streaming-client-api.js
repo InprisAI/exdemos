@@ -406,7 +406,8 @@ const loadJSON = async () => {
           throw new Error('Network response was not OK');
         }
 
-        conversationId = response.headers.get('Conversation-Id');
+        if (response.headers.get('Conversation-Id'))
+          conversationId = response.headers.get('Conversation-Id');
 
         const buffer = await response.arrayBuffer();
         const decoder = new TextDecoder('utf-8');
