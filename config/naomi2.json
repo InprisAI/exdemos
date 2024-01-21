@@ -9,9 +9,9 @@
     "direction": "rtl",
 
     "textAngel": "נעמי",
-    "textDescription": "היי, אני נעמי ממורה AI בתיכון אמי\"ת",
+    "textDescription": "היי, אני נעמי מורה מבוססת בינה מלאכותית בתיכון אמי\"ת",
     "loadingSpeech": "Loading speech recognition ...",
     "loading": "Thinking ...",
-    "sendMessage": "שאל אותי על תכנית SMART",
+    "sendMessage": "שאל אותי על שיטת SMART",
     "sendImageIcon": "../images/send.svg"
 }
