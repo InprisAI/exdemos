@@ -480,7 +480,7 @@ const loadJSON = async () => {
     talkVideoStream.style.zIndex = 1;
 
     talkVideo.srcObject = undefined;
-    talkVideo.src = CUSTOM.video;
+    talkVideo.src = idleUrl;
     talkVideo.loop = true;
   }
 
