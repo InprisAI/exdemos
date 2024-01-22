@@ -1,0 +1,19 @@
+{
+    "title": "inbal5", 
+    "voice": "en-US-JennyNeural",
+    "image": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_58b1704bff34eebf5536c87cbfc00b52.jpg",
+    "video": "idle.mp4",
+    "humain": "demo:inbal5",
+    "recognition_lang": "en-US",
+    "idle_url": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_58b1704bff34eebf5536c87cbfc00b52.mp4",
+    "direction": "ltr",
+
+    "textAngel": "inbal5",
+    "textDescription": "Hi, I'm Angel and I'm a HumAIn by Inpris",
+
+
+    "loadingSpeech": "Loading speech recognition ...",
+    "loading": "Thinking ...",
+    "sendMessage": "Send a message to chat",
+    "sendImageIcon": "../images/send.svg"
+}
