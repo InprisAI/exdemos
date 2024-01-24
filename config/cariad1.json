@@ -1,15 +1,15 @@
 {
-    "title": "inbal1", 
+    "title": "Cariad Demo 2024", 
     "voice": "en-US-JennyNeural",
     "image": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_58b1704bff34eebf5536c87cbfc00b52.jpg",
     "idle_url": "https://ugc-idle.s3-us-west-2.amazonaws.com/est_58b1704bff34eebf5536c87cbfc00b52.mp4",
     "video": "idle.mp4",
-    "humain": "demo:inbal1",
+    "humain": "demo:cariad1",
     "recognition_lang": "en-US",
     "direction": "ltr",
 
-    "textAngel": "inbal1",
-    "textDescription": "Hi, I'm Angel and I'm a HumAIn by Inpris",
+    "textAngel": "Joy the HumAIn",
+    "textDescription": "Hi, I'm Joy and I'm a HumAIn by Inpris assigned as an in-car companion",
 
 
     "loadingSpeech": "Loading speech recognition ...",
